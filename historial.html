@@ -45,12 +45,12 @@
 <table id="tablaVuelos">
   <thead>
     <tr>
-      <th>Fecha</th>
-      <th>Escala</th>
-      <th>Matricula</th>
-      <th>LLegada Numero Vuelo</th>
-      <th>Salida Numero Vuelo</th>
-      <th>Posición</th>
+      <th>FECHA</th>
+      <th>ESCALA</th>
+      <th>MATRICULA</th>
+      <th>LLEGADA NUMERO VUELO</th>
+      <th>SALIDA NUMERO VUELO</th>
+      <th>POSICIÓN</th>
     </tr>
   </thead>
   <tbody>
@@ -61,7 +61,7 @@
 </table>
 
 <script>
-  const url = "https://script.google.com/macros/s/AKfycbyo9_68rGbJ_8mcocxkQdMF59Ic_lpTd1Ndcn3lwzpBGHuZ9waMAFEY-5odtCBosfer/exec"; // reemplazar por tu URL de despliegue
+  const url = "https://script.google.com/macros/s/AKfycbyo9_68rGbJ_8mcocxkQdMF59Ic_lpTd1Ndcn3lwzpBGHuZ9waMAFEY-5odtCBosfer/exec"; // <- reemplazar con la URL de despliegue
 
   fetch(url)
     .then(response => response.json())
@@ -77,12 +77,12 @@
       data.forEach(fila => {
         const tr = document.createElement("tr");
         tr.innerHTML = `
-          <td>${fila.Fecha || ""}</td>
-          <td>${fila.Escala || ""}</td>
-          <td>${fila.Matricula || ""}</td>
-          <td>${fila["LLegada Numero Vuelo"] || ""}</td>
-          <td>${fila["Salida Numero Vuelo"] || ""}</td>
-          <td>${fila["Posición"] || ""}</td>
+          <td>${fila.FECHA || ""}</td>
+          <td>${fila.ESCALA || ""}</td>
+          <td>${fila.MATRICULA || ""}</td>
+          <td>${fila["LLEGADA NUMERO VUELO"] || ""}</td>
+          <td>${fila["SALIDA NUMERO VUELO"] || ""}</td>
+          <td>${fila["POSICIÓN"] || ""}</td>
         `;
         tbody.appendChild(tr);
       });
