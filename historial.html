@@ -20,16 +20,15 @@
 <table id="tablaVuelos">
   <thead>
     <tr>
-      <th>FECHA</th>
-      <th>ESCALA</th>
-      <th>MATRICULA</th>
-      <th>LLEGADA NUMERO VUELO</th>
-      <th>SALIDA NUMERO VUELO</th>
-      <th>POSICIÓN</th>
+      <th>Fecha</th>
+      <th>Escala</th>
+      <th>Matricula</th>
+      <th>LLegada Numero Vuelo</th>
+      <th>Salida Numero Vuelo</th>
     </tr>
   </thead>
   <tbody>
-    <tr><td colspan="6" class="loading">Cargando datos...</td></tr>
+    <tr><td colspan="5" class="loading">Cargando datos...</td></tr>
   </tbody>
 </table>
 
@@ -44,7 +43,7 @@
       tbody.innerHTML = "";
 
       if (!data || data.length === 0) {
-        tbody.innerHTML = `<tr><td colspan="6">No hay datos disponibles</td></tr>`;
+        tbody.innerHTML = `<tr><td colspan="5">No hay datos disponibles</td></tr>`;
         return;
       }
 
@@ -56,7 +55,6 @@
           <td>${fila["Matricula"] || ""}</td>
           <td>${fila["LLegada Numero Vuelo"] || ""}</td>
           <td>${fila["Salida Numero Vuelo"] || ""}</td>
-          <td>${fila["Posición"] || ""}</td>
         `;
         tbody.appendChild(tr);
       });
@@ -64,7 +62,7 @@
     .catch(err => {
       console.error("Error:", err);
       document.querySelector("#tablaVuelos tbody").innerHTML =
-        `<tr><td colspan="6">Error al cargar los datos</td></tr>`;
+        `<tr><td colspan="5">Error al cargar los datos</td></tr>`;
     });
 </script>
 
