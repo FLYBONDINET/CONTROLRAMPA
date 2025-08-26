@@ -54,18 +54,17 @@
     </tr>
   </thead>
   <tbody>
-    <tr>
-      <td colspan="6" class="loading">Cargando datos...</td>
-    </tr>
+    <tr><td colspan="6" class="loading">Cargando datos...</td></tr>
   </tbody>
 </table>
 
 <script>
-  const url = "https://script.google.com/macros/s/AKfycbyo9_68rGbJ_8mcocxkQdMF59Ic_lpTd1Ndcn3lwzpBGHuZ9waMAFEY-5odtCBosfer/exec"; // <- reemplazar con la URL de despliegue
+  const url = "https://script.google.com/macros/s/AKfycbyo9FOWqgonowIj1gUaWraPW7TA0p7Xqu6wsMNM3Dp4IsexCQ6gbc69aRfgNRfXnvwf/exec";
 
   fetch(url)
-    .then(response => response.json())
+    .then(res => res.json())
     .then(data => {
+      console.log("DEBUG:", data); // 👀 ver qué llega
       const tbody = document.querySelector("#tablaVuelos tbody");
       tbody.innerHTML = "";
 
@@ -77,22 +76,23 @@
       data.forEach(fila => {
         const tr = document.createElement("tr");
         tr.innerHTML = `
-          <td>${fila.FECHA || ""}</td>
-          <td>${fila.ESCALA || ""}</td>
-          <td>${fila.MATRICULA || ""}</td>
-          <td>${fila["LLEGADA NUMERO VUELO"] || ""}</td>
-          <td>${fila["SALIDA NUMERO VUELO"] || ""}</td>
-          <td>${fila["POSICIÓN"] || ""}</td>
+          <td>${fila["Fecha"] || ""}</td>
+          <td>${fila["Escala"] || ""}</td>
+          <td>${fila["Matricula"] || ""}</td>
+          <td>${fila["LLegada Numero Vuelo"] || ""}</td>
+          <td>${fila["Salida Numero Vuelo"] || ""}</td>
+          <td>${fila["Posición"] || ""}</td>
         `;
         tbody.appendChild(tr);
       });
     })
-    .catch(error => {
-      console.error("Error al cargar los datos:", error);
-      document.querySelector("#tablaVuelos tbody").innerHTML = 
+    .catch(err => {
+      console.error("Error:", err);
+      document.querySelector("#tablaVuelos tbody").innerHTML =
         `<tr><td colspan="6">Error al cargar los datos</td></tr>`;
     });
 </script>
+
 
 </body>
 </html>
