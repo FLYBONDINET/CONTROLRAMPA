@@ -3,75 +3,87 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Rampa Flybondi</title>
+  <title>Rampa Flybondi - App Móvil</title>
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html, body { height: 100%; }
 
     body {
-      font-family: 'Arial', sans-serif;
-      background: url('https://drive.google.com/uc?id=1edQVNkM7YM-upj0xWKw1gkGrt7RzJ1Ad') no-repeat center center fixed;
-      background-size: cover;
+      font-family: Arial, sans-serif;
       display: flex;
       justify-content: center;
       align-items: center;
-      height: 100vh;
+      min-height: 100vh;
+      margin: 0;
       color: #fff;
+      /* Fondo usando imagen local */
+      background: url('fondo.jpg') no-repeat center center;
+      background-size: contain; /* Para que se vea completa la imagen */
+      background-position: center;
+      background-attachment: fixed;
     }
 
     .container {
-      background: rgba(0, 0, 0, 0.7);
+      background: rgba(0,0,0,0.7);
       border-radius: 20px;
       padding: 30px;
-      width: 350px;
+      width: 90%;
+      max-width: 400px;
       text-align: center;
-      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+      box-shadow: 0 6px 25px rgba(0,0,0,0.6);
       animation: fadeIn 1s ease-in-out;
     }
 
     h1 {
       color: #ff6600;
-      margin-bottom: 20px;
       font-size: 28px;
       font-weight: bold;
-      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+      margin-bottom: 25px;
+      text-shadow: 2px 2px 5px rgba(0,0,0,0.7);
     }
 
     .button {
       background-color: #ff6600;
       color: #fff;
       border: none;
-      padding: 15px;
-      margin: 10px 0;
+      border-radius: 12px;
+      padding: 18px;
+      margin: 12px 0;
       font-size: 18px;
-      border-radius: 10px;
       width: 100%;
       cursor: pointer;
       display: flex;
       align-items: center;
       justify-content: center;
-      gap: 10px;
-      transition: all 0.3s ease;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-    }
-
-    .button:hover {
-      background-color: #e65c00;
-      transform: translateY(-3px);
-      box-shadow: 0 6px 15px rgba(0, 0, 0, 0.4);
+      gap: 12px;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.3);
     }
 
     .button i {
       font-size: 24px;
     }
 
+    .button:active {
+      transform: scale(0.95);
+      box-shadow: 0 3px 10px rgba(0,0,0,0.4);
+    }
+
+    .button:hover {
+      background-color: #e65c00;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.5);
+    }
+
     @keyframes fadeIn {
       0% { opacity: 0; transform: translateY(-20px); }
       100% { opacity: 1; transform: translateY(0); }
+    }
+
+    @media (max-width: 450px) {
+      h1 { font-size: 24px; }
+      .button { font-size: 16px; padding: 15px; }
     }
   </style>
 </head>
