@@ -17,9 +17,8 @@
       min-height: 100vh;
       margin: 0;
       color: #fff;
-      /* Fondo que se vea completo */
       background: url('https://i.imgur.com/gnuNEhk.jpeg') no-repeat center center;
-      background-size: contain; /* Se ajusta para mostrar toda la imagen */
+      background-size: cover; /* se ajusta para cubrir toda la pantalla */
       background-position: center;
       background-attachment: fixed;
     }
@@ -59,6 +58,7 @@
       gap: 12px;
       transition: transform 0.2s ease, box-shadow 0.2s ease;
       box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+      touch-action: manipulation;
     }
 
     .button i {
@@ -97,7 +97,7 @@
       <i class="material-icons">flight_takeoff</i> Vuelo Salida
     </button>
     <button class="button" onclick="location.href='TA.html'">
-      <i class="material-icons">flight_TA</i> Vuelo en Tránsito
+      <i class="material-icons">flight</i> Vuelo en Tránsito
     </button>
     <button class="button" onclick="location.href='historial.html'">
       <i class="material-icons">history</i> Historial de Vuelos
