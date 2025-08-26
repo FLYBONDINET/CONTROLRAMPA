@@ -5,43 +5,18 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Listado de Vuelos</title>
 <style>
-  body {
-    font-family: Arial, sans-serif;
-    background: #f4f4f4;
-    margin: 20px;
-  }
-  h1 {
-    text-align: center;
-    color: #333;
-  }
-  table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 20px;
-    background: #fff;
-  }
-  th, td {
-    padding: 12px;
-    border: 1px solid #ddd;
-    text-align: center;
-  }
-  th {
-    background-color: #0f254d;
-    color: #eaf2ff;
-  }
-  tr:nth-child(even) {
-    background-color: #f2f2f2;
-  }
-  .loading {
-    text-align: center;
-    font-style: italic;
-    color: #666;
-  }
+  body { font-family: Arial, sans-serif; background: #f4f4f4; margin: 20px; }
+  h1 { text-align: center; color: #333; }
+  table { width: 100%; border-collapse: collapse; margin-top: 20px; background: #fff; }
+  th, td { padding: 12px; border: 1px solid #ddd; text-align: center; }
+  th { background-color: #0f254d; color: #eaf2ff; }
+  tr:nth-child(even) { background-color: #f2f2f2; }
+  .loading { text-align: center; font-style: italic; color: #666; }
 </style>
 </head>
 <body>
 
-<h1>Listado de Vuelos 1.1</h1>
+<h1>Listado de Vuelos</h1>
 <table id="tablaVuelos">
   <thead>
     <tr>
@@ -64,7 +39,7 @@
   fetch(url)
     .then(res => res.json())
     .then(data => {
-      console.log("DEBUG:", data); // 👀 ver qué llega
+      console.log("DEBUG datos:", data); // 👀
       const tbody = document.querySelector("#tablaVuelos tbody");
       tbody.innerHTML = "";
 
@@ -92,7 +67,6 @@
         `<tr><td colspan="6">Error al cargar los datos</td></tr>`;
     });
 </script>
-
 
 </body>
 </html>
