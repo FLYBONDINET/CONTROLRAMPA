@@ -1,207 +1,200 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Formulario Atención de Vuelo</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      background-color: #0f172a; /* fondo oscuro */
-      color: #f1f5f9;
-      margin: 0;
-      padding: 20px;
-    }
-    h2 {
-      background-color: #1e293b;
-      padding: 10px;
-      border-radius: 6px;
-      margin-top: 25px;
-    }
-    label {
-      display: block;
-      margin-top: 10px;
-      font-weight: bold;
-    }
-    input, textarea, button {
-      width: 100%;
-      padding: 8px;
-      margin-top: 5px;
-      border-radius: 6px;
-      border: 1px solid #475569;
-      background-color: #1e293b;
-      color: #f1f5f9;
-    }
-    input[type="number"] {
-      -moz-appearance: textfield;
-    }
-    input::-webkit-outer-spin-button,
-    input::-webkit-inner-spin-button {
-      -webkit-appearance: none;
-      margin: 0;
-    }
-    button.time-btn {
-      width: auto;
-      margin-top: 5px;
-      background-color: #2563eb;
-      border: none;
-      cursor: pointer;
-    }
-    button.time-btn:hover {
-      background-color: #1d4ed8;
-    }
-    textarea {
-      height: 80px;
-    }
-    .section {
-      padding: 15px;
-      background-color: #111827;
-      border-radius: 10px;
-      margin-bottom: 20px;
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Formulario Atención de Vuelo Completo</title>
+<style>
+body {font-family: Arial,sans-serif; background-color:#0f172a; color:#f1f5f9; margin:0; padding:15px;}
+h1{text-align:center; font-size:1.6rem;}
+h2{background-color:#1e293b; padding:8px; border-radius:6px; margin-top:20px; font-size:1.2rem;}
+.section{padding:15px; background-color:#111827; border-radius:10px; margin-bottom:20px;}
+label{display:block; margin-top:12px; font-weight:bold; font-size:0.9rem;}
+input, select, textarea, button{width:100%; padding:8px; margin-top:5px; border-radius:6px; border:1px solid #475569; background-color:#1e293b; color:#f1f5f9; font-size:0.9rem; box-sizing:border-box;}
+textarea{min-height:70px; resize:vertical;}
+button.time-btn{width:auto; display:inline-block; margin-top:5px; background-color:#2563eb; border:none; cursor:pointer; font-size:0.8rem; padding:6px 10px;}
+button.time-btn:hover{background-color:#1d4ed8;}
+button[type="submit"]{background-color:#16a34a; font-size:1rem; font-weight:bold; border:none; cursor:pointer; padding:12px; margin-top:20px;}
+button[type="submit"]:hover{background-color:#15803d;}
+@media(min-width:600px){.grid-2{display:grid; grid-template-columns:1fr 1fr; gap:10px;} .grid-3{display:grid; grid-template-columns:1fr 1fr 1fr; gap:10px;}}
+</style>
 </head>
 <body>
-  <h1>Formulario de Atención de Vuelo</h1>
-  <form id="vueloForm">
-    
-    <!-- INFORMACIÓN DEL VUELO -->
-    <div class="section">
-      <h2>Información del Vuelo</h2>
-      <label>Fecha <input type="date" name="fecha"></label>
-      <label>Escala <input type="text" name="escala"></label>
-      <label>Matrícula <input type="text" name="matricula"></label>
-      <label>Llegada N° Vuelo <input type="text" name="vueloLlegada"></label>
-      <label>Posición de Parada <input type="text" name="posicion"></label>
-    </div>
+<h1>Formulario Atención de Vuelo</h1>
+<form id="vueloForm">
 
-    <!-- PERSONAL DE RAMPA -->
-    <div class="section">
-      <h2>Personal de Rampa / Load Control</h2>
-      <label>SSR Supervisor <input type="text" name="ssr"></label>
-      <label>Colaborador 1 <input type="text" name="col1"></label>
-      <label>Colaborador 2 <input type="text" name="col2"></label>
-      <label>Colaborador 3 <input type="text" name="col3"></label>
-      <label>Colaborador 4 Adicional <input type="text" name="col4"></label>
-      <label>Colaborador Patio Equipaje 1 <input type="text" name="peq1"></label>
-      <label>Colaborador Patio Equipaje 2 <input type="text" name="peq2"></label>
-      <label>Colaborador Patio Equipaje 3 <input type="text" name="peq3"></label>
-      <label>Colaborador Patio Equipaje 4 <input type="text" name="peq4"></label>
-      <label>Conciliación Equipaje <input type="text" name="conciliacion"></label>
-      <label>Chofer 1 <input type="text" name="chofer1"></label>
-      <label>Chofer 2 <input type="text" name="chofer2"></label>
-      <label>Chofer 3 <input type="text" name="chofer3"></label>
-      <label>Chofer 4 <input type="text" name="chofer4"></label>
-      <label>Load Control <input type="text" name="loadcontrol"></label>
-    </div>
+<!-- INFORMACIÓN DEL VUELO -->
+<div class="section">
+<h2>Información del Vuelo</h2>
+<div class="grid-2">
+<label>Fecha<input type="date" name="fecha"></label>
+<label>Escala
+<select name="escala">
+<option value="">-- IATA --</option>
+<option>AEP</option><option>CNQ</option><option>COR</option><option>CRD</option>
+<option>EZE</option><option>ENO</option><option>FLN</option><option>FTE</option>
+<option>GIG</option><option>GRU</option><option>IGR</option><option>MDQ</option>
+<option>MDZ</option><option>NQN</option><option>PMY</option><option>PSS</option>
+<option>SDE</option><option>SLA</option><option>UAQ</option><option>USH</option>
+</select>
+</label>
+</div>
+<label>Matrícula
+<select name="matricula">
+<option value="">-- Matrícula --</option>
+<option>LV-HKN</option><option>LV-KAH</option><option>LV-KAY</option><option>LV-KCE</option>
+<option>LV-KDQ</option><option>LV-KDR</option><option>LV-KEF</option><option>LV-KEG</option>
+<option>LV-KEH</option><option>LV-KJD</option><option>LV-KJE</option><option>LV-KJF</option>
+</select>
+</label>
+<div class="grid-2">
+<label>Llegada N° Vuelo<input type="text" name="vueloLlegada"></label>
+<label>Posición de Parada<input type="text" name="posicion"></label>
+</div>
+</div>
 
-    <!-- PATIO DE EQUIPAJE -->
-    <div class="section">
-      <h2>Patio de Equipaje</h2>
-      <label>Apertura 
-        <input type="time" name="apertura">
-        <button type="button" class="time-btn" onclick="setNow('apertura')">Ahora</button>
-      </label>
-      <label>Cierre 
-        <input type="time" name="cierre">
-        <button type="button" class="time-btn" onclick="setNow('cierre')">Ahora</button>
-      </label>
-    </div>
+<!-- PERSONAL DE RAMPA -->
+<div class="section">
+<h2>Personal de Rampa / Load Control</h2>
+<div class="grid-3">
+<label>SSR<input type="text" name="ssr"></label>
+<label>Colaborador 1<input type="text" name="col1"></label>
+<label>Colaborador 2<input type="text" name="col2"></label>
+<label>Colaborador 3<input type="text" name="col3"></label>
+<label>Colaborador 4 Adicional<input type="text" name="col4"></label>
+<label>Colaborador Patio 1<input type="text" name="colPatio1"></label>
+<label>Colaborador Patio 2<input type="text" name="colPatio2"></label>
+<label>Colaborador Patio 3<input type="text" name="colPatio3"></label>
+<label>Colaborador Patio 4<input type="text" name="colPatio4"></label>
+<label>Conciliación de equipaje<input type="text" name="conciliacion"></label>
+<label>Chofer 1<input type="text" name="chofer1"></label>
+<label>Chofer 2<input type="text" name="chofer2"></label>
+<label>Chofer 3<input type="text" name="chofer3"></label>
+<label>Chofer 4<input type="text" name="chofer4"></label>
+<label>Load Control<input type="text" name="loadControl"></label>
+</div>
+</div>
 
-    <!-- PASAJEROS -->
-    <div class="section">
-      <h2>Pasajeros</h2>
-      <label>Llegada Cantidad PAX <input type="number" name="pax"></label>
-    </div>
+<!-- PATIO DE EQUIPAJE -->
+<div class="section">
+<h2>Patio de Equipaje</h2>
+<label>Apertura<input type="text" name="apertura" readonly>
+<button type="button" class="time-btn" onclick="setNow('apertura')">📌 Hora</button></label>
+<label>Cierre<input type="text" name="cierre" readonly>
+<button type="button" class="time-btn" onclick="setNow('cierre')">📌 Hora</button></label>
+</div>
 
-    <!-- EQUIPAJE -->
-    <div class="section">
-      <h2>Equipaje</h2>
-      <label>Llegada KG de equipajes <input type="number" name="kgEquipaje"></label>
-      <label>Llegada Cantidad de bultos <input type="number" name="bultosEquipaje"></label>
-    </div>
+<!-- PASAJEROS -->
+<div class="section">
+<h2>Pasajeros</h2>
+<label>Llegada Cantidad PAX<input type="number" name="pax"></label>
+</div>
 
-    <!-- CARGA -->
-    <div class="section">
-      <h2>Carga</h2>
-      <label>Llegada KG de carga <input type="number" name="kgCarga"></label>
-      <label>Llegada Cantidad de bultos <input type="number" name="bultosCarga"></label>
-    </div>
+<!-- EQUIPAJE -->
+<div class="section">
+<h2>Equipaje</h2>
+<label>Llegada KG de Equipajes<input type="number" name="equipajeKg"></label>
+<label>Llegada Cantidad de Bultos<input type="number" name="equipajeBultos"></label>
+</div>
 
-    <!-- OTROS CAMPOS -->
-    <div class="section">
-      <h2>Otros Datos</h2>
-      <label>Estado de Bolsín <input type="text" name="bolsin"></label>
-      <label>Número de Precinto <input type="text" name="precinto"></label>
-      <label>Calzas Colocación <input type="text" name="calzas"></label>
-      <label>GPU Encendido <input type="text" name="gpuEnc"></label>
-      <label>GPU Conexión Aeronave <input type="text" name="gpuCon"></label>
-    </div>
+<!-- CARGA -->
+<div class="section">
+<h2>Carga</h2>
+<label>Llegada KG de Carga<input type="number" name="cargaKg"></label>
+<label>Llegada Cantidad de Bultos<input type="number" name="cargaBultos"></label>
+</div>
 
-    <!-- ASISTENCIAS y TIMINGS (ejemplo, se pueden extender todos) -->
-    <div class="section">
-      <h2>Asistencias y Tiempos</h2>
-      <label>EA / EM Delantera Adose 
-        <input type="time" name="eaDelantera">
-        <button type="button" class="time-btn" onclick="setNow('eaDelantera')">Ahora</button>
-      </label>
-      <label>EA Trasera Adose 
-        <input type="time" name="eaTrasera">
-        <button type="button" class="time-btn" onclick="setNow('eaTrasera')">Ahora</button>
-      </label>
-      <label>Pasarela Adose 
-        <input type="time" name="pasarela">
-        <button type="button" class="time-btn" onclick="setNow('pasarela')">Ahora</button>
-      </label>
-    </div>
+<!-- OPERACIONES -->
+<div class="section">
+<h2>Operaciones</h2>
+<label>Estado de Bolsín<input type="text" name="estadoBolsin"></label>
+<label>Número de Precinto<input type="text" name="numPrecinto"></label>
+<label>Calzas Colocación<input type="text" name="calzas" readonly>
+<button type="button" class="time-btn" onclick="setNow('calzas')">📌 Hora</button></label>
+<label>GPU Encendido<input type="text" name="gpuEncendido" readonly>
+<button type="button" class="time-btn" onclick="setNow('gpuEncendido')">📌 Hora</button></label>
+<label>GPU Conexión Aeronave<input type="text" name="gpuConexion" readonly>
+<button type="button" class="time-btn" onclick="setNow('gpuConexion')">📌 Hora</button></label>
+</div>
 
-    <!-- OBSERVACIONES -->
-    <div class="section">
-      <h2>Observaciones</h2>
-      <textarea name="observaciones"></textarea>
-    </div>
+<!-- EA/EM y BODEGA -->
+<div class="section">
+<h2>EA/EM y Bodega</h2>
+<label>EA/EM Delantera Adose<input type="text" name="eaDelanteraAdose" readonly>
+<button type="button" class="time-btn" onclick="setNow('eaDelanteraAdose')">📌 Hora</button></label>
+<label>EA Trasera Adose<input type="text" name="eaTraseraAdose" readonly>
+<button type="button" class="time-btn" onclick="setNow('eaTraseraAdose')">📌 Hora</button></label>
+<label>Pasarela Adose<input type="text" name="pasarelaAdose" readonly>
+<button type="button" class="time-btn" onclick="setNow('pasarelaAdose')">📌 Hora</button></label>
+<label>Bodega Delantera Apertura<input type="text" name="bodegaDelApertura" readonly>
+<button type="button" class="time-btn" onclick="setNow('bodegaDelApertura')">📌 Hora</button></label>
+<label>Bodega Delantera Comienzo Descarga<input type="text" name="bodegaDelComienzo" readonly>
+<button type="button" class="time-btn" onclick="setNow('bodegaDelComienzo')">📌 Hora</button></label>
+<label>Bodega Delantera Fin Descarga<input type="text" name="bodegaDelFin" readonly>
+<button type="button" class="time-btn" onclick="setNow('bodegaDelFin')">📌 Hora</button></label>
+<label>Bodega Delantera Cierre<input type="text" name="bodegaDelCierre" readonly>
+<button type="button" class="time-btn" onclick="setNow('bodegaDelCierre')">📌 Hora</button></label>
+<label>Bodega Trasera Apertura<input type="text" name="bodegaTrasApertura" readonly>
+<button type="button" class="time-btn" onclick="setNow('bodegaTrasApertura')">📌 Hora</button></label>
+<label>Bodega Trasera Comienzo Descarga<input type="text" name="bodegaTrasComienzo" readonly>
+<button type="button" class="time-btn" onclick="setNow('bodegaTrasComienzo')">📌 Hora</button></label>
+<label>Bodega Trasera Fin Descarga<input type="text" name="bodegaTrasFin" readonly>
+<button type="button" class="time-btn" onclick="setNow('bodegaTrasFin')">📌 Hora</button></label>
+<label>Bodega Trasera Cierre<input type="text" name="bodegaTrasCierre" readonly>
+<button type="button" class="time-btn" onclick="setNow('bodegaTrasCierre')">📌 Hora</button></label>
+</div>
 
-    <button type="submit">Enviar</button>
-  </form>
+<!-- ASISTENCIAS -->
+<div class="section">
+<h2>Asistencias</h2>
+<div class="grid-3">
+<label>GPU Interno<input type="number" name="gpuInterno"></label>
+<label>TL Interno<input type="number" name="tlInterno"></label>
+<label>CT Interno<input type="number" name="ctInterno1"></label>
+<label>CT Interno<input type="number" name="ctInterno2"></label>
+<label>TP Interno<input type="number" name="tpInterno"></label>
+<label>BR Interno<input type="number" name="brInterno"></label>
+<label>EA/EM Delantera Interno<input type="number" name="eaDelInterno"></label>
+<label>EA Trasera Interno<input type="number" name="eaTrasInterno"></label>
+<label>CM Interno<input type="number" name="cmInterno1"></label>
+<label>CM Interno<input type="number" name="cmInterno2"></label>
+<label>CM Interno<input type="number" name="cmInterno3"></label>
+<label>CM Interno<input type="number" name="cmInterno4"></label>
+<label>CM Interno<input type="number" name="cmInterno5"></label>
+<label>CM Interno<input type="number" name="cmInterno6"></label>
+<label>M Interno<input type="number" name="mInterno1"></label>
+<label>M Interno<input type="number" name="mInterno2"></label>
+<label>M Interno<input type="number" name="mInterno3"></label>
+<label>M Interno<input type="number" name="mInterno4"></label>
+<label>AM/AA Interno<input type="number" name="amaaInterno"></label>
+<label>DM/DA Interno<input type="number" name="dmdaInterno"></label>
+</div>
+</div>
 
-  <script>
-    const form = document.getElementById("vueloForm");
+<!-- DEMORA Y OBSERVACIONES -->
+<div class="section">
+<h2>Código Demora y Observaciones</h2>
+<label>Código Demora<input type="text" name="codigoDemora"></label>
+<label>Observaciones<textarea name="observaciones"></textarea></label>
+</div>
 
-    // --- Autoguardado en localStorage ---
-    form.addEventListener("input", () => {
-      const data = new FormData(form);
-      const obj = {};
-      data.forEach((value, key) => obj[key] = value);
-      localStorage.setItem("vueloForm", JSON.stringify(obj));
-    });
+<button type="submit">Enviar Formulario</button>
+</form>
 
-    // --- Cargar datos guardados ---
-    window.addEventListener("DOMContentLoaded", () => {
-      const saved = localStorage.getItem("vueloForm");
-      if (saved) {
-        const obj = JSON.parse(saved);
-        Object.keys(obj).forEach(key => {
-          if (form.elements[key]) form.elements[key].value = obj[key];
-        });
-      }
-    });
+<script>
+const form=document.getElementById("vueloForm");
 
-    // --- Botón de hora actual ---
-    function setNow(name) {
-      const now = new Date();
-      const hh = String(now.getHours()).padStart(2, '0');
-      const mm = String(now.getMinutes()).padStart(2, '0');
-      form.elements[name].value = `${hh}:${mm}`;
-      form.dispatchEvent(new Event("input")); // disparar autoguardado
-    }
+// Autoguardado
+form.addEventListener("input",()=>{const data=new FormData(form); const obj={}; data.forEach((v,k)=>obj[k]=v); localStorage.setItem("vueloForm",JSON.stringify(obj));});
 
-    // --- Enviar formulario (ejemplo simple) ---
-    form.addEventListener("submit", (e) => {
-      e.preventDefault();
-      alert("Formulario enviado. (Aquí iría el guardado en servidor)");
-      localStorage.removeItem("vueloForm");
-      form.reset();
-    });
-  </script>
+// Recuperar datos
+window.addEventListener("DOMContentLoaded",()=>{const saved=localStorage.getItem("vueloForm"); if(saved){const obj=JSON.parse(saved); Object.keys(obj).forEach(k=>{if(form.elements[k]) form.elements[k].value=obj[k];});}});
+
+// Botón hora
+function setNow(name){const now=new Date(); const hh=String(now.getHours()).padStart(2,'0'); const mm=String(now.getMinutes()).padStart(2,'0'); form.elements[name].value=`${hh}:${mm}`; form.dispatchEvent(new Event("input"));}
+
+// Envío
+form.addEventListener("submit",e=>{e.preventDefault(); alert("Formulario enviado ✅"); localStorage.removeItem("vueloForm"); form.reset();});
+</script>
 </body>
 </html>
