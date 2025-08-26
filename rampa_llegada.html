@@ -1,178 +1,253 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Formulario de Vuelo</title>
-  <style>
-    body { font-family: Arial, sans-serif; margin: 0; padding: 0; background-color: #f4f4f4; }
-    .container { max-width: 800px; margin: 20px auto; padding: 20px; background-color: #fff; border-radius: 8px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); }
-    h1 { text-align: center; color: #333; }
-    label { display: block; margin: 10px 0 5px; font-weight: bold; }
-    input[type="text"], input[type="number"], input[type="time"], input[type="date"], textarea { width: 100%; padding: 8px; margin-bottom: 10px; border: 1px solid #ccc; border-radius: 4px; }
-    textarea { height: 100px; }
-    button { padding: 10px 20px; background-color: #4CAF50; color: white; border: none; border-radius: 4px; cursor: pointer; }
-    button:hover { background-color: #45a049; }
-    .form-section { margin-bottom: 20px; }
-    .time-button { background-color: #007BFF; }
-    .time-button:hover { background-color: #0056b3; }
-    .hidden { display: none; }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Formulario de Vuelo</title>
+<style>
+  body { font-family: Arial, sans-serif; margin:0; padding:0; background:#f4f4f4; }
+  .container { max-width:900px; margin:20px auto; padding:20px; background:#fff; border-radius:8px; box-shadow:0 0 10px rgba(0,0,0,0.1);}
+  h1,h2 { text-align:center; color:#333; }
+  label { display:block; margin:8px 0 3px; font-weight:bold; }
+  input[type=text], input[type=number], input[type=date], input[type=time], textarea, select { width:100%; padding:8px; border:1px solid #ccc; border-radius:4px; margin-bottom:10px; box-sizing:border-box; }
+  textarea { height:80px; }
+  button { padding:8px 15px; background:#4CAF50; color:#fff; border:none; border-radius:4px; cursor:pointer; margin-bottom:10px;}
+  button:hover { background:#45a049;}
+  .time-button { background:#007BFF; margin-top:5px;}
+  .time-button:hover { background:#0056b3;}
+  .section { margin-bottom:20px; }
+</style>
 </head>
 <body>
-
 <div class="container">
-  <h1>Formulario de Vuelo</h1>
-  <form id="vueloForm">
-    <!-- Información del vuelo -->
-    <div class="form-section">
-      <label for="fecha">Fecha</label>
-      <input type="date" id="fecha" name="fecha" required>
-    </div>
+<h1>Formulario de Vuelo</h1>
+<form id="vueloForm">
 
-    <div class="form-section">
-      <label for="escala">Escala</label>
-      <input type="text" id="escala" name="escala" required>
-    </div>
+<!-- INFORMACION DEL VUELO -->
+<div class="section">
+<h2>Información del Vuelo</h2>
+<label for="fecha">Fecha</label>
+<input type="date" id="fecha" name="fecha" required>
+<button type="button" onclick="setToday('fecha')">Hoy</button>
 
-    <div class="form-section">
-      <label for="matricula">Matrícula</label>
-      <input type="text" id="matricula" name="matricula" required>
-    </div>
+<label for="escala">Escala (Código IATA)</label>
+<input type="text" id="escala" name="escala">
 
-    <div class="form-section">
-      <label for="vueloLlegada">Número de Vuelo (Llegada)</label>
-      <input type="text" id="vueloLlegada" name="vueloLlegada" required>
-    </div>
+<label for="matricula">Matrícula</label>
+<input type="text" id="matricula" name="matricula">
 
-    <div class="form-section">
-      <label for="posicion">Posición de Parada</label>
-      <input type="text" id="posicion" name="posicion">
-    </div>
+<label for="vueloLlegada">Número de Vuelo (Llegada)</label>
+<input type="text" id="vueloLlegada" name="vueloLlegada">
 
-    <!-- Personal de rampa -->
-    <div class="form-section">
-      <label for="personalRampa">Personal de Rampa</label>
-      <input type="text" id="personalRampa" name="personalRampa" placeholder="Colaborador 1, Colaborador 2, ...">
-    </div>
+<label for="posicion">Posición de Parada</label>
+<input type="text" id="posicion" name="posicion">
+</div>
 
-    <!-- Carros y Micros -->
-    <div class="form-section">
-      <label for="carros">Carros</label>
-      <input type="text" id="carros" name="carros" placeholder="Números separados por coma">
-    </div>
+<!-- PERSONAL DE RAMPA -->
+<div class="section">
+<h2>Personal de Rampa / Load Control</h2>
+<input type="text" name="ssr" placeholder="SSR (supervisor)">
+<input type="text" name="col1" placeholder="Colaborador 1">
+<input type="text" name="col2" placeholder="Colaborador 2">
+<input type="text" name="col3" placeholder="Colaborador 3">
+<input type="text" name="col4" placeholder="Colaborador 4 Adicional">
+<input type="text" name="colPatio1" placeholder="Colaborador Patio de equipaje">
+<input type="text" name="colPatio2" placeholder="Colaborador Patio de equipaje">
+<input type="text" name="colPatio3" placeholder="Colaborador Patio de equipaje">
+<input type="text" name="colPatio4" placeholder="Colaborador Patio de equipaje">
+<input type="text" name="conciliacion" placeholder="Conciliación de equipaje">
+<input type="text" name="choferes" placeholder="Chofer 1,2,3,4">
+<input type="text" name="loadControl" placeholder="Load Control">
+</div>
 
-    <div class="form-section">
-      <label for="internosMicros">Internos de Micros</label>
-      <input type="text" id="internosMicros" name="internosMicros" placeholder="Internos separados por coma">
-    </div>
+<!-- PATIO DE EQUIPAJE -->
+<div class="section">
+<h2>Patio de Equipaje</h2>
+<button type="button" class="time-button" onclick="setNow('apertura')">Apertura</button>
+<input type="time" id="apertura" name="apertura">
 
-    <!-- Asistencias -->
-    <div class="form-section">
-      <label for="asistencias">Asistencias Llegada</label>
-      <input type="number" id="asistencias" name="asistencias">
-    </div>
+<button type="button" class="time-button" onclick="setNow('cierre')">Cierre</button>
+<input type="time" id="cierre" name="cierre">
+</div>
 
-    <!-- Observaciones -->
-    <div class="form-section">
-      <label for="observaciones">Observaciones</label>
-      <textarea id="observaciones" name="observaciones"></textarea>
-    </div>
+<!-- PASAJEROS -->
+<div class="section">
+<h2>Pasajeros</h2>
+<label>Llegada Cantidad PAX</label>
+<input type="number" name="pax">
+</div>
 
-    <!-- Botones de hora -->
-    <div class="form-section">
-      <button type="button" class="time-button" onclick="setTime('horaAdoseDelantera')">EA/EM Delantera Adose</button>
-      <input type="time" id="horaAdoseDelantera" name="horaAdoseDelantera" class="hidden">
-    </div>
+<!-- EQUIPAJE -->
+<div class="section">
+<h2>Equipaje</h2>
+<label>Llegada KG de equipajes</label>
+<input type="number" name="equipajeKg">
+<label>Llegada Cantidad de bultos</label>
+<input type="number" name="equipajeBultos">
+</div>
 
-    <div class="form-section">
-      <button type="button" class="time-button" onclick="setTime('horaAdoseTrasera')">EA Trasera Adose</button>
-      <input type="time" id="horaAdoseTrasera" name="horaAdoseTrasera" class="hidden">
-    </div>
+<!-- CARGA -->
+<div class="section">
+<h2>Carga</h2>
+<label>Llegada KG de carga</label>
+<input type="number" name="cargaKg">
+<label>Llegada Cantidad de bultos</label>
+<input type="number" name="cargaBultos">
+</div>
 
-    <div class="form-section">
-      <button type="button" class="time-button" onclick="setTime('horaPasarelaAdose')">Pasarela Adose</button>
-      <input type="time" id="horaPasarelaAdose" name="horaPasarelaAdose" class="hidden">
-    </div>
+<!-- ESTADO BOLSIN Y GPU -->
+<div class="section">
+<h2>Estado de Bolsin y GPU</h2>
+<input type="text" name="estadoBolsin" placeholder="Estado de bolsin">
+<input type="text" name="numPrecinto" placeholder="Número de precinto">
+<button type="button" class="time-button" onclick="setNow('calzas')">Calzas Colocación</button>
+<input type="time" id="calzas" name="calzas">
+<button type="button" class="time-button" onclick="setNow('gpuEncendido')">GPU Encendido</button>
+<input type="time" id="gpuEncendido" name="gpuEncendido">
+<button type="button" class="time-button" onclick="setNow('gpuConexion')">GPU Conexión Aeronave</button>
+<input type="time" id="gpuConexion" name="gpuConexion">
+</div>
 
-    <div class="form-section">
-      <button type="button" class="time-button" onclick="setTime('horaBodegaDelanteraApertura')">Bodega Delantera Apertura</button>
-      <input type="time" id="horaBodegaDelanteraApertura" name="horaBodegaDelanteraApertura" class="hidden">
-    </div>
+<!-- BOTONES DE HORA EA/EM Y BODEGA (como antes) -->
+<div class="section">
+<h2>Eventos de Bodega y Adose</h2>
+<button type="button" class="time-button" onclick="setNow('eaDelantera')">EA / EM Delantera Adose</button>
+<input type="time" id="eaDelantera" name="eaDelantera">
+<button type="button" class="time-button" onclick="setNow('eaTrasera')">EA Trasera Adose</button>
+<input type="time" id="eaTrasera" name="eaTrasera">
+<button type="button" class="time-button" onclick="setNow('pasarelaAdose')">Pasarela Adose</button>
+<input type="time" id="pasarelaAdose" name="pasarelaAdose">
+<!-- Bodega Delantera -->
+<button type="button" class="time-button" onclick="setNow('bDelanteraApertura')">Bodega Delantera Apertura</button>
+<input type="time" id="bDelanteraApertura" name="bDelanteraApertura">
+<button type="button" class="time-button" onclick="setNow('bDelanteraInicio')">Bodega Delantera Inicio Descarga</button>
+<input type="time" id="bDelanteraInicio" name="bDelanteraInicio">
+<button type="button" class="time-button" onclick="setNow('bDelanteraFin')">Bodega Delantera Fin Descarga</button>
+<input type="time" id="bDelanteraFin" name="bDelanteraFin">
+<button type="button" class="time-button" onclick="setNow('bDelanteraCierre')">Bodega Delantera Cierre</button>
+<input type="time" id="bDelanteraCierre" name="bDelanteraCierre">
+<!-- Bodega Trasera -->
+<button type="button" class="time-button" onclick="setNow('bTraseraApertura')">Bodega Trasera Apertura</button>
+<input type="time" id="bTraseraApertura" name="bTraseraApertura">
+<button type="button" class="time-button" onclick="setNow('bTraseraInicio')">Bodega Trasera Inicio Descarga</button>
+<input type="time" id="bTraseraInicio" name="bTraseraInicio">
+<button type="button" class="time-button" onclick="setNow('bTraseraFin')">Bodega Trasera Fin Descarga</button>
+<input type="time" id="bTraseraFin" name="bTraseraFin">
+<button type="button" class="time-button" onclick="setNow('bTraseraCierre')">Bodega Trasera Cierre</button>
+<input type="time" id="bTraseraCierre" name="bTraseraCierre">
+</div>
 
-    <div class="form-section">
-      <button type="button" class="time-button" onclick="setTime('horaBodegaDelanteraDescargaInicio')">Bodega Delantera Comienzo Descarga</button>
-      <input type="time" id="horaBodegaDelanteraDescargaInicio" name="horaBodegaDelanteraDescargaInicio" class="hidden">
-    </div>
+<!-- Carros e Internos de micros -->
+<div class="section">
+<label>Carros (números separados por coma)</label>
+<input type="text" name="carros">
+<label>Internos Micros (números separados por coma)</label>
+<input type="text" name="internosMicros">
+</div>
 
-    <div class="form-section">
-      <button type="button" class="time-button" onclick="setTime('horaBodegaDelanteraDescargaFin')">Bodega Delantera Fin Descarga</button>
-      <input type="time" id="horaBodegaDelanteraDescargaFin" name="horaBodegaDelanteraDescargaFin" class="hidden">
-    </div>
+<!-- Asistencias -->
+<div class="section">
+<label>Asistencias Llegada</label>
+<input type="number" name="asistencias">
+<label>GPU Interno</label>
+<input type="number" name="gpuInterno">
+<label>TL Interno</label>
+<input type="number" name="tlInterno">
+<label>CT Interno</label>
+<input type="number" name="ctInterno1">
+<input type="number" name="ctInterno2">
+<label>TP Interno</label>
+<input type="number" name="tpInterno">
+<label>BR Interno</label>
+<input type="number" name="brInterno">
+<label>EA / EM Delantera Interno</label>
+<input type="number" name="eaDelInterno">
+<label>EA Trasera Interno</label>
+<input type="number" name="eaTrasInterno">
+<label>CM Interno</label>
+<input type="number" name="cmInterno1">
+<input type="number" name="cmInterno2">
+<input type="number" name="cmInterno3">
+<input type="number" name="cmInterno4">
+<input type="number" name="cmInterno5">
+<input type="number" name="cmInterno6">
+<label>M Interno</label>
+<input type="number" name="mInterno1">
+<input type="number" name="mInterno2">
+<input type="number" name="mInterno3">
+<input type="number" name="mInterno4">
+<label>AM / AA Interno</label>
+<input type="number" name="amaaInterno">
+<label>DM / DA Interno</label>
+<input type="number" name="dmdaInterno">
+</div>
 
-    <div class="form-section">
-      <button type="button" class="time-button" onclick="setTime('horaBodegaDelanteraCierre')">Bodega Delantera Cierre</button>
-      <input type="time" id="horaBodegaDelanteraCierre" name="horaBodegaDelanteraCierre" class="hidden">
-    </div>
+<!-- Demora y Observaciones -->
+<div class="section">
+<label>Código Demora</label>
+<input type="text" name="codigoDemora">
+<label>Observaciones</label>
+<textarea name="observaciones"></textarea>
+</div>
 
-    <div class="form-section">
-      <button type="button" class="time-button" onclick="setTime('horaBodegaTraseraApertura')">Bodega Trasera Apertura</button>
-      <input type="time" id="horaBodegaTraseraApertura" name="horaBodegaTraseraApertura" class="hidden">
-    </div>
-
-    <div class="form-section">
-      <button type="button" class="time-button" onclick="setTime('horaBodegaTraseraDescargaInicio')">Bodega Trasera Comienzo Descarga</button>
-      <input type="time" id="horaBodegaTraseraDescargaInicio" name="horaBodegaTraseraDescargaInicio" class="hidden">
-    </div>
-
-    <div class="form-section">
-      <button type="button" class="time-button" onclick="setTime('horaBodegaTraseraDescargaFin')">Bodega Trasera Fin Descarga</button>
-      <input type="time" id="horaBodegaTraseraDescargaFin" name="horaBodegaTraseraDescargaFin" class="hidden">
-    </div>
-
-    <div class="form-section">
-      <button type="button" class="time-button" onclick="setTime('horaBodegaTraseraCierre')">Bodega Trasera Cierre</button>
-      <input type="time" id="horaBodegaTraseraCierre" name="horaBodegaTraseraCierre" class="hidden">
-    </div>
-
-    <div class="form-section">
-      <label for="codigoDemora">Código Demora</label>
-      <input type="text" id="codigoDemora" name="codigoDemora">
-    </div>
-
-    <div class="form-section">
-      <label for="observacionesFinales">Observaciones</label>
-      <textarea id="observacionesFinales" name="observacionesFinales"></textarea>
-    </div>
-
-    <button type="submit">Enviar Formulario</button>
-  </form>
+<button type="submit">Enviar Formulario</button>
+</form>
 </div>
 
 <script>
-  const form = document.getElementById('vueloForm');
-  const formData = new FormData(form);
+const form=document.getElementById("vueloForm");
 
-  // Autoguardado local
-  form.addEventListener('input', () => {
-    const data = new FormData(form);
-    const obj = {};
-    data.forEach((value, key) => {
-      obj[key] = value;
+// Autoguardado local y envío automático
+form.addEventListener("input",()=>{
+  const data=new FormData(form);
+  const obj={};
+  data.forEach((v,k)=>obj[k]=v);
+  localStorage.setItem("vueloForm",JSON.stringify(obj));
+  
+  fetch("https://script.google.com/macros/s/AKfycbwKBt0kvZcCfRZJaYLrLWizjoxMYvqGpra6mzGrDgvHsma9nnbcw4dJm8ltkFH6Hz-K/exec",{
+    method:"POST",
+    body:new URLSearchParams(obj)
+  }).then(res=>res.text()).then(console.log).catch(err=>console.log("No se pudo enviar al sheet, guardado local OK",err));
+});
+
+// Recuperar datos
+window.addEventListener("DOMContentLoaded",()=>{
+  const saved=localStorage.getItem("vueloForm");
+  if(saved){
+    const obj=JSON.parse(saved);
+    Object.keys(obj).forEach(k=>{
+      if(form.elements[k]) form.elements[k].value=obj[k];
     });
-    localStorage.setItem('vueloForm', JSON.stringify(obj));
+  }
+});
 
-    // Envío automático a Google Sheets
-    fetch('https://script.google.com/macros/s/AKfycbwKBt0kvZcCfRZJaYLrLWizjoxMYvqGpra6mzGrDgvHsma9nnbcw4dJm8ltkFH6Hz-K/exec', {
-      method: 'POST',
-      body: new URLSearchParams(obj)
-    }).then(response => response.text())
-      .then(console.log)
-      .catch(error => {
-        console.log('No se pudo enviar al sheet, guardado local OK', error);
-      });
-  });
+// Botones de hora
+function setNow(name){
+  const now=new Date();
+  const hh=String(now.getHours()).padStart(2,'0');
+  const mm=String(now.getMinutes()).padStart(2,'0');
+  form.elements[name].value=`${hh}:${mm}`;
+  form.dispatchEvent(new Event("input"));
+}
 
-  // Recuperar datos desde
-::contentReference[oaicite:0]{index=0}
- 
+// Botón hoy
+function setToday(name){
+  const today=new Date();
+  const yyyy=today.getFullYear();
+  const mm=String(today.getMonth()+1).padStart(2,'0');
+  const dd=String(today.getDate()).padStart(2,'0');
+  form.elements[name].value=`${yyyy}-${mm}-${dd}`;
+  form.elements[name].focus();
+  form.dispatchEvent(new Event("input"));
+}
+
+// Envío final
+form.addEventListener("submit",e=>{
+  e.preventDefault();
+  alert("Formulario enviado ✅");
+  localStorage.removeItem("vueloForm");
+  form.reset();
+});
+</script>
+</body>
+</html>
