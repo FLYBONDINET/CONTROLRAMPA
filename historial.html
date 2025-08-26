@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Listado de Vuelos</title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    background: #f4f4f4;
+    margin: 20px;
+  }
+  h1 {
+    text-align: center;
+    color: #333;
+  }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    background: #fff;
+  }
+  th, td {
+    padding: 12px;
+    border: 1px solid #ddd;
+    text-align: center;
+  }
+  th {
+    background-color: #0f254d;
+    color: #eaf2ff;
+  }
+  tr:nth-child(even) {
+    background-color: #f2f2f2;
+  }
+</style>
+</head>
+<body>
+
+<h1>Listado de Vuelos</h1>
+<table id="tablaVuelos">
+  <thead>
+    <tr>
+      <th>FECHA</th>
+      <th>ESCALA</th>
+      <th>MATRICULA</th>
+      <th>LLEGADA NUMERO VUELO</th>
+      <th>SALIDA NUMERO VUELO</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td colspan="5">Cargando datos...</td>
+    </tr>
+  </tbody>
+</table>
+
+<script>
+  const url = "https://script.google.com/macros/s/AKfycbwKBt0kvZcCfRZJaYLrLWizjoxMYvqGpra6mzGrDgvHsma9nnbcw4dJm8ltkFH6Hz-K/exec";
+
+  fetch(url)
+    .then(response => response.json())
+    .then(data => {
+      const tbody = document.querySelector("#tablaVuelos tbody");
+      tbody.innerHTML = ""; // Limpiar "Cargando datos..."
+      
+      data.forEach(fila => {
+        const tr = document.createElement("tr");
+        tr.innerHTML = `
+          <td>${fila.FECHA || ""}</td>
+          <td>${fila.ESCALA || ""}</td>
+          <td>${fila.MATRICULA || ""}</td>
+          <td>${fila["LLEGADA NUMERO VUELO"] || ""}</td>
+          <td>${fila["SALIDA NUMERO VUELO"] || ""}</td>
+        `;
+        tbody.appendChild(tr);
+      });
+    })
+    .catch(error => {
+      console.error("Error al cargar los datos:", error);
+      document.querySelector("#tablaVuelos tbody").innerHTML = `<tr><td colspan="5">Error al cargar los datos</td></tr>`;
+    });
+</script>
+
+</body>
+</html>
