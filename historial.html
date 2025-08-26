@@ -32,7 +32,6 @@
   tr:nth-child(even) {
     background-color: #f2f2f2;
   }
-  /* Opcional: mensaje de carga centrado */
   .loading {
     text-align: center;
     font-style: italic;
@@ -46,42 +45,44 @@
 <table id="tablaVuelos">
   <thead>
     <tr>
-      <th>FECHA</th>
-      <th>ESCALA</th>
-      <th>MATRICULA</th>
-      <th>LLEGADA NUMERO VUELO</th>
-      <th>SALIDA NUMERO VUELO</th>
+      <th>Fecha</th>
+      <th>Escala</th>
+      <th>Matricula</th>
+      <th>LLegada Numero Vuelo</th>
+      <th>Salida Numero Vuelo</th>
+      <th>Posición</th>
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td colspan="5" class="loading">Cargando datos...</td>
+      <td colspan="6" class="loading">Cargando datos...</td>
     </tr>
   </tbody>
 </table>
 
 <script>
-  const url = "https://script.google.com/macros/s/AKfycbyo9_68rGbJ_8mcocxkQdMF59Ic_lpTd1Ndcn3lwzpBGHuZ9waMAFEY-5odtCBosfer/exec"; // <- reemplazar por tu URL de Apps Script desplegado
+  const url = "https://script.google.com/macros/s/AKfycbyo9_68rGbJ_8mcocxkQdMF59Ic_lpTd1Ndcn3lwzpBGHuZ9waMAFEY-5odtCBosfer/exec"; // reemplazar por tu URL de despliegue
 
   fetch(url)
     .then(response => response.json())
     .then(data => {
       const tbody = document.querySelector("#tablaVuelos tbody");
-      tbody.innerHTML = ""; // limpiar mensaje de "Cargando datos..."
+      tbody.innerHTML = "";
 
       if (!data || data.length === 0) {
-        tbody.innerHTML = `<tr><td colspan="5">No hay datos disponibles</td></tr>`;
+        tbody.innerHTML = `<tr><td colspan="6">No hay datos disponibles</td></tr>`;
         return;
       }
 
       data.forEach(fila => {
         const tr = document.createElement("tr");
         tr.innerHTML = `
-          <td>${fila.FECHA || ""}</td>
-          <td>${fila.ESCALA || ""}</td>
-          <td>${fila.MATRICULA || ""}</td>
-          <td>${fila["LLEGADA NUMERO VUELO"] || ""}</td>
-          <td>${fila["SALIDA NUMERO VUELO"] || ""}</td>
+          <td>${fila.Fecha || ""}</td>
+          <td>${fila.Escala || ""}</td>
+          <td>${fila.Matricula || ""}</td>
+          <td>${fila["LLegada Numero Vuelo"] || ""}</td>
+          <td>${fila["Salida Numero Vuelo"] || ""}</td>
+          <td>${fila["Posición"] || ""}</td>
         `;
         tbody.appendChild(tr);
       });
@@ -89,7 +90,7 @@
     .catch(error => {
       console.error("Error al cargar los datos:", error);
       document.querySelector("#tablaVuelos tbody").innerHTML = 
-        `<tr><td colspan="5">Error al cargar los datos</td></tr>`;
+        `<tr><td colspan="6">Error al cargar los datos</td></tr>`;
     });
 </script>
 
