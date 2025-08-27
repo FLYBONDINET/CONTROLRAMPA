@@ -48,7 +48,16 @@
     background:var(--card); border:1px solid var(--border);
     border-radius:16px; padding:16px; margin-bottom:16px;
   }
-  .legend{font-weight:700; margin-bottom:12px}
+
+  /* Acordeón styles (añadidos) */
+  .legend{
+    font-weight:700; margin-bottom:12px;
+    cursor:pointer; display:flex; justify-content:space-between; align-items:center;
+  }
+  .legend span.icon{ font-weight:900; font-size:18px; margin-left:10px; }
+  .card-content{ display:none; padding-top:0; }
+  .card.open .card-content{ display:block; }
+
   .grid{
     display:grid; gap:12px;
     grid-template-columns: repeat(1fr);
@@ -95,101 +104,113 @@
 <main>
   <!-- Datos de vuelo -->
   <section class="card">
-    <div class="legend">Datos de vuelo</div>
-    <div class="grid">
-      <div class="field col-4">
-        <label for="Fecha">Fecha</label>
-        <input type="date" id="Fecha" />
+    <div class="legend">Datos de vuelo <span class="icon">+</span></div>
+    <div class="card-content">
+      <div class="grid">
+        <div class="field col-4">
+          <label for="Fecha">Fecha</label>
+          <input type="date" id="Fecha" />
+        </div>
+        <div class="field col-4">
+          <label for="Escala">Escala (IATA)</label>
+          <select id="Escala"></select>
+        </div>
+        <div class="field col-4">
+          <label for="Matricula">Matrícula</label>
+          <select id="Matricula"></select>
+        </div>
+        <div class="field col-3"><label for="Llegada_Numero_Vuelo">LLegada vuelo FO </label><input id="Llegada_Numero_Vuelo" /></div>
+        <div class="field col-3"><label for="Salida_Numero_Vuelo">Salida vuelo FO</label><input id="Salida_Numero_Vuelo" /></div>
+        <div class="field col-3"><label for="Posición">Posición</label><input id="Posición" /></div>
       </div>
-      <div class="field col-4">
-        <label for="Escala">Escala (IATA)</label>
-        <select id="Escala"></select>
-      </div>
-      <div class="field col-4">
-        <label for="Matricula">Matrícula</label>
-        <select id="Matricula"></select>
-      </div>
-      <div class="field col-3"><label for="Llegada_Numero_Vuelo">LLegada vuelo FO </label><input id="Llegada_Numero_Vuelo" /></div>
-      <div class="field col-3"><label for="Salida_Numero_Vuelo">Salida vuelo FO</label><input id="Salida_Numero_Vuelo" /></div>
-      <div class="field col-3"><label for="Posición">Posición</label><input id="Posición" /></div>
-</section>
+    </div>
+  </section>
 
 
-<!-- Datos de Personal -->
+  <!-- Datos de Personal -->
   <section class="card">
-    <div class="legend">Datos de Personal</div>
-    <div class="grid">
-<div class="field col-3"><label for="SSR">SSR</label><input id="SSR" /></div>
-<div class="field col-3"><label for="Colaboradores_en_plataforma">Colaboradores en plataforma</label><input id="Colaboradores_en_plataforma" /></div>
-<div class="field col-3"><label for="Colaboradores_en_Patio_de_equipaje">Colaboradores en Patio de equipaje</label><input id="Colaboradores_en_Patio_de_equipaje" /></div>
-<div class="field col-3"><label for="Conciliacion_de_equipaje">Conciliacion de equipaje</label><input id="Conciliacion_de_equipaje" /></div>
-<div class="field col-3"><label for="Choferes_de_micro">Choferes de micro</label><input id="Choferes_de_micro" /></div>
-<div class="field col-3"><label for="Load_Control">Load Control</label><input id="Load_Control" /></div>
+    <div class="legend">Datos de Personal <span class="icon">+</span></div>
+    <div class="card-content">
+      <div class="grid">
+        <div class="field col-3"><label for="SSR">SSR</label><input id="SSR" /></div>
+        <div class="field col-3"><label for="Colaboradores_en_plataforma">Colaboradores en plataforma</label><input id="Colaboradores_en_plataforma" /></div>
+        <div class="field col-3"><label for="Colaboradores_en_Patio_de_equipaje">Colaboradores en Patio de equipaje</label><input id="Colaboradores_en_Patio_de_equipaje" /></div>
+        <div class="field col-3"><label for="Conciliacion_de_equipaje">Conciliacion de equipaje</label><input id="Conciliacion_de_equipaje" /></div>
+        <div class="field col-3"><label for="Choferes_de_micro">Choferes de micro</label><input id="Choferes_de_micro" /></div>
+        <div class="field col-3"><label for="Load_Control">Load Control</label><input id="Load_Control" /></div>
+      </div>
     </div>
   </section>
 
   <!-- Equipajes y Carga -->
   <section class="card">
-    <div class="legend">Equipajes y Carga</div>
-    <div class="grid">
-      <div class="field col-3"><label for="Llegada__Cantidad_de_bultos_equipajes">Llegada  Cantidad de bultos (equipajes)</label><input type="number" min="0" id="Llegada__Cantidad_de_bultos_equipajes" /></div>
-	  <div class="field col-3"><label for="Llegada_KG_de_equipajes">Llegada KG de equipajes</label><input type="number" min="0" step="0.1" id="Llegada_KG_de_equipajes" /></div>
+    <div class="legend">Equipajes y Carga <span class="icon">+</span></div>
+    <div class="card-content">
+      <div class="grid">
+        <div class="field col-3"><label for="Llegada__Cantidad_de_bultos_equipajes">Llegada  Cantidad de bultos (equipajes)</label><input type="number" min="0" id="Llegada__Cantidad_de_bultos_equipajes" /></div>
+        <div class="field col-3"><label for="Llegada_KG_de_equipajes">Llegada KG de equipajes</label><input type="number" min="0" step="0.1" id="Llegada_KG_de_equipajes" /></div>
 
-		<div class="field col-3"><label for="Llegada_Cantidad_de_bultos_carga">Llegada Cantidad de bultos (carga)</label><input type="number" min="0" id="Llegada_Cantidad_de_bultos_carga" /></div>    	
-	  <div class="field col-3"><label for="Llegada_KG_de_carga">Llegada KG de carga</label><input type="number" min="0" step="0.1" id="Llegada_KG_de_carga" /></div>
-		
-	<div class="field col-3"><label for="LLegada_Cantidad_PAX">LLegada Cantidad PAX</label><input type="number" min="0" id="LLegada_Cantidad_PAX" /></div>
+        <div class="field col-3"><label for="Llegada_Cantidad_de_bultos_carga">Llegada Cantidad de bultos (carga)</label><input type="number" min="0" id="Llegada_Cantidad_de_bultos_carga" /></div>    	
+        <div class="field col-3"><label for="Llegada_KG_de_carga">Llegada KG de carga</label><input type="number" min="0" step="0.1" id="Llegada_KG_de_carga" /></div>
 
-	  <div class="field col-3"><label for="Salida_Cantidad_de_bultos_equipajes">Salida Cantidad de bultos (equipajes)</label><input type="number" min="0" id="Salida_Cantidad_de_bultos_equipajes" /></div>
-      <div class="field col-3"><label for="Salida_KG_de_equipajes">Salida KG de equipajes</label><input type="number" min="0" step="0.1" id="Salida_KG_de_equipajes" /></div>
+        <div class="field col-3"><label for="LLegada_Cantidad_PAX">LLegada Cantidad PAX</label><input type="number" min="0" id="LLegada_Cantidad_PAX" /></div>
 
-      <div class="field col-3"><label for="Salida_Cantidad_de_bultos_carga">Salida Cantidad de bultos (carga)</label><input type="number" min="0" id="Salida_Cantidad_de_bultos_carga" /></div>	
-      <div class="field col-3"><label for="Salida_KG_de_carga">Salida KG de carga</label><input type="number" min="0" step="0.1" id="Salida_KG_de_carga" /></div>
-	
-	<div class="field col-3"><label for="Salida_Cantidad_PAX">Salida Cantidad PAX</label><input type="number" min="0" id="Salida_Cantidad_PAX" /></div>
+        <div class="field col-3"><label for="Salida_Cantidad_de_bultos_equipajes">Salida Cantidad de bultos (equipajes)</label><input type="number" min="0" id="Salida_Cantidad_de_bultos_equipajes" /></div>
+        <div class="field col-3"><label for="Salida_KG_de_equipajes">Salida KG de equipajes</label><input type="number" min="0" step="0.1" id="Salida_KG_de_equipajes" /></div>
 
+        <div class="field col-3"><label for="Salida_Cantidad_de_bultos_carga">Salida Cantidad de bultos (carga)</label><input type="number" min="0" id="Salida_Cantidad_de_bultos_carga" /></div>	
+        <div class="field col-3"><label for="Salida_KG_de_carga">Salida KG de carga</label><input type="number" min="0" step="0.1" id="Salida_KG_de_carga" /></div>
 
-      <div class="field col-3">
-        <label for="Estado_de_bolsin">Estado de bolsin</label>
-        <select id="Estado_de_bolsin"><option></option><option>OK</option><option>Observado</option><option>No aplica</option></select>
+        <div class="field col-3"><label for="Salida_Cantidad_PAX">Salida Cantidad PAX</label><input type="number" min="0" id="Salida_Cantidad_PAX" /></div>
+
+        <div class="field col-3">
+          <label for="Estado_de_bolsin">Estado de bolsin</label>
+          <select id="Estado_de_bolsin"><option></option><option>OK</option><option>Observado</option><option>No aplica</option></select>
+        </div>
+        <div class="field col-3"><label for="Numero_de_precinto">Numero de precinto</label><input id="Numero_de_precinto" /></div>
       </div>
-      <div class="field col-3"><label for="Numero_de_precinto">Numero de precinto</label><input id="Numero_de_precinto" /></div>
     </div>
   </section>
 
-  !-- Tiempos operativos (con botón de hora) -->
+  <!-- Tiempos operativos (con botón de hora) -->
   <section class="card">
-    <div class="legend">Tiempos operativos</div>
-    <div class="grid" id="timeGrid"></div>
-    <div class="small">Todos estos campos tienen botón ⏱ para cargar hora actual (editable).</div>
+    <div class="legend">Tiempos operativos <span class="icon">+</span></div>
+    <div class="card-content">
+      <div class="grid" id="timeGrid"></div>
+      <div class="small">Todos estos campos tienen botón ⏱ para cargar hora actual (editable).</div>
+    </div>
   </section>
 
   <!-- Asistencias e internos -->
   <section class="card">
-    <div class="legend">Asistencias e internos</div>
-    <div class="grid">
-      <div class="field col-3"><label for="Asistencias_Llegada">Asistencias Llegada</label><input type="number" min="0" id="Asistencias_Llegada" /></div>
-      <div class="field col-3"><label for="Asistencias_salida">Asistencias salida</label><input type="number" min="0" id="Asistencias_salida" /></div>
+    <div class="legend">Asistencias e internos <span class="icon">+</span></div>
+    <div class="card-content">
+      <div class="grid">
+        <div class="field col-3"><label for="Asistencias_Llegada">Asistencias Llegada</label><input type="number" min="0" id="Asistencias_Llegada" /></div>
+        <div class="field col-3"><label for="Asistencias_salida">Asistencias salida</label><input type="number" min="0" id="Asistencias_salida" /></div>
 
-      <div class="field col-3"><label for="GPU_Interno">GPU Interno</label><input id="GPU_Interno" /></div>
-      <div class="field col-3"><label for="TL_Interno">TL Interno</label><input id="TL_Interno" /></div>
-      <div class="field col-3"><label for="CT_INTERNO">CT INTERNO</label><input id="CT_INTERNO" /></div>
-      <div class="field col-3"><label for="TP_INTERNO">TP INTERNO</label><input id="TP_INTERNO" /></div>
-      <div class="field col-3"><label for="BR_INTERNO">BR INTERNO</label><input id="BR_INTERNO" /></div>
-      <div class="field col-3"><label for="ESCALERA_DELANTERA_INTERNO">ESCALERA DELANTERA INTERNO</label><input id="ESCALERA_DELANTERA_INTERNO" /></div>
-      <div class="field col-3"><label for="ESCALERA_TRASERA_INTERNO">ESCALERA TRASERA INTERNO</label><input id="ESCALERA_TRASERA_INTERNO" /></div>
-      <div class="field col-3"><label for="CM_INTERNOS">CM INTERNOS</label><input id="CM_INTERNOS" /></div>
-      <div class="field col-3"><label for="MICROS_INTERNOS">MICROS INTERNOS</label><input id="MICROS_INTERNOS" /></div>
-      <div class="field col-3"><label for="AM_AA_Interno">AM / AA Interno</label><input id="AM_AA_Interno" /></div>
-      <div class="field col-3"><label for="DM_DA_Interno">DM / DA  Interno</label><input id="DM_DA_Interno" /></div>
-      <div class="field col-3"><label for="CÓDIGO_DEMORA">CÓDIGO DEMORA</label><input id="CÓDIGO_DEMORA" /></div>
+        <div class="field col-3"><label for="GPU_Interno">GPU Interno</label><input id="GPU_Interno" /></div>
+        <div class="field col-3"><label for="TL_Interno">TL Interno</label><input id="TL_Interno" /></div>
+        <div class="field col-3"><label for="CT_INTERNO">CT INTERNO</label><input id="CT_INTERNO" /></div>
+        <div class="field col-3"><label for="TP_INTERNO">TP INTERNO</label><input id="TP_INTERNO" /></div>
+        <div class="field col-3"><label for="BR_INTERNO">BR INTERNO</label><input id="BR_INTERNO" /></div>
+        <div class="field col-3"><label for="ESCALERA_DELANTERA_INTERNO">ESCALERA DELANTERA INTERNO</label><input id="ESCALERA_DELANTERA_INTERNO" /></div>
+        <div class="field col-3"><label for="ESCALERA_TRASERA_INTERNO">ESCALERA TRASERA INTERNO</label><input id="ESCALERA_TRASERA_INTERNO" /></div>
+        <div class="field col-3"><label for="CM_INTERNOS">CM INTERNOS</label><input id="CM_INTERNOS" /></div>
+        <div class="field col-3"><label for="MICROS_INTERNOS">MICROS INTERNOS</label><input id="MICROS_INTERNOS" /></div>
+        <div class="field col-3"><label for="AM_AA_Interno">AM / AA Interno</label><input id="AM_AA_Interno" /></div>
+        <div class="field col-3"><label for="DM_DA_Interno">DM / DA  Interno</label><input id="DM_DA_Interno" /></div>
+        <div class="field col-3"><label for="CÓDIGO_DEMORA">CÓDIGO DEMORA</label><input id="CÓDIGO_DEMORA" /></div>
+      </div>
     </div>
   </section>
 
   <!-- Observaciones -->
   <section class="card">
-    <div class="legend">Observaciones</div>
-    <textarea id="Observaciones" placeholder="Anotaciones operativas, novedades, etc."></textarea>
+    <div class="legend">Observaciones <span class="icon">+</span></div>
+    <div class="card-content">
+      <textarea id="Observaciones" placeholder="Anotaciones operativas, novedades, etc."></textarea>
+    </div>
   </section>
 
   <div class="bar">
@@ -210,6 +231,22 @@ const DESTINOS_IATA = [
 ];
 // Matrículas — editables
 const MATRICULAS = ["LV-KJD","LV-KJE","LV-KAY","LV-KAH","LV-KJF","LV-KCD","LV-KCE","LV-HKN","LV-KHO","LV-KEF","LV-KEG","LV-KEH","LV-KDR","LV-KDQ","LY-MLJ","LY-VEL","LY-NVL","PR-MLD"];
+
+/* ====================
+   Render de acordeón
+   (todas las secciones arrancan cerradas)
+==================== */
+document.querySelectorAll(".card .legend").forEach(legend=>{
+  // icon already in HTML; ensure it's "+"
+  const icon = legend.querySelector(".icon");
+  if(icon) icon.textContent = "+";
+  legend.addEventListener("click", ()=>{
+    const card = legend.parentElement;
+    card.classList.toggle("open");
+    const ic = legend.querySelector(".icon");
+    if(ic) ic.textContent = card.classList.contains("open") ? "−" : "+";
+  });
+});
 
 /* ====================
    Definición de campos
