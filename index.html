@@ -47,7 +47,14 @@
       gap: 8px;
       transition: transform 0.2s ease, box-shadow 0.2s ease;
     }
-
+.logo {
+  max-width: 500px; /* Ajusta tamaño según necesites */
+  width: 50%;       /* Escala en móviles */
+  height: auto;
+  margin-bottom: 20px; /* Espacio debajo de la imagen */
+  display: block;
+  object-fit: contain;
+}
     .container {
       background: rgba(0,0,0,0.7);
       border-radius: 40px;
@@ -113,7 +120,7 @@
   </style>
 </head>
 <body>
-
+<img src="https://i.imgur.com/i5Zxe0k.png" alt="Logo Flybondi" class="logo">
   <!-- Contadores como menú -->
   <div class="top-bar">
     <div class="contador" id="vuelosDia">Vuelos hoy: 0</div>
