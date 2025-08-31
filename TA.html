@@ -723,4 +723,693 @@ document.getElementById("toggleAsu").addEventListener("click", () => {
 });
 </script>
 </body>
+</html>    background:var(--card); border-bottom:1px solid var(--border);
+    padding:12px 16px; display:flex; align-items:center; gap:8px;
+  }
+  header h1{font-size:25px; margin:0; flex:1;}
+  .chip{font-size:12px; color:var(--muted)}
+  .btn{
+    background:var(--accent); color:#111; border:0; border-radius:10px;
+    padding:10px 14px; font-weight:600; cursor:pointer;
+  }
+  .ghost{background:transparent; color:var(--fg); border:1px solid var(--border)}
+  main{padding:16px; max-width:768px; margin:0 auto}
+  .card{
+    background:var(--card); border:1px solid var(--border);
+    border-radius:16px; padding:16px; margin-bottom:16px;
+  }
+
+  #extraDropdown {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease, opacity 0.3s ease;
+  opacity: 0;
+}
+#extraDropdown.show {
+  max-height: 500px; /* ajusta según lo que contenga */
+  opacity: 1;
+}
+#extraDropdown,
+#salisa {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease, opacity 0.3s ease;
+  opacity: 0;
+}
+#extraDropdown.show,
+#salisa.show {
+  max-height: 500px;
+  opacity: 1;
+}
+#extraDropdown,
+#carga1 {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease, opacity 0.3s ease;
+  opacity: 0;
+}
+#extraDropdown.show,
+#carga1.show {
+  max-height: 500px;
+  opacity: 1;
+}
+.logo-container {
+  display: flex;
+  justify-content: center; /* centra horizontal */
+  align-items: center;     /* centra vertical si hay altura */
+}
+
+.logo {
+  max-width: 200px;
+  width: 40%;
+  height: auto;
+  object-fit: contain;
+}
+#extraDropdown,
+#carga2 {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease, opacity 0.3s ease;
+  opacity: 0;
+}
+#extraDropdown.show,
+#carga2.show {
+  max-height: 500px;
+  opacity: 1;
+}
+
+  /* Acordeón styles (añadidos) */
+  .legend{
+    font-weight:700; margin-bottom:12px;
+    cursor:pointer; display:flex; justify-content:space-between; align-items:center;
+  }
+  .legend span.icon{ font-weight:900; font-size:18px; margin-left:10px; }
+  .card-content{ display:none; padding-top:0; }
+  .card.open .card-content{ display:block; }
+  .grid{
+    display:grid; gap:12px;
+    grid-template-columns: repeat(1fr);
+  }
+  .col-12{grid-column: span 4}
+  .col-6{grid-column: span 4}
+  .col-4{grid-column: span 4}
+  .col-3{grid-column: span 4}
+  .field label{
+    display:block; font-size:13px; color:var(--muted); margin:2px 0 6px;
+  }
+  .row{
+    display:flex; gap:8px; align-items:center;
+  }
+  input, select, textarea{
+    width:100%; padding:10px 12px; border-radius:10px; outline:none;
+    border:1px solid var(--border); background:var(--input-bg); color:var(--fg);
+    font-size:16px;
+  }
+  input[type="time"]{padding-right:0}
+  textarea{min-height:110px; resize:vertical}
+  .time-wrap{ flex-direction: column; display:flex; gap:4px; align-items:center}
+  .time-btn{
+    border:0; background:var(--accent); color:#111; font-weight:900;font-size: 20px;
+    border-radius:25px; padding:15px 120px; cursor:pointer; white-space:nowrap;
+  }
+  .bar{
+    position:sticky; bottom:0; z-index:5; background:var(--card);
+    border-top:1px solid var(--border); padding:10px 16px;
+    display:flex; gap:8px; align-items:center;
+  }
+  .bar .status{flex:1; font-size:12px; color:var(--muted)}
+  .ok{color:var(--ok)} .warn{color:var(--warn)} .err{color:var(--err)}
+  .small{font-size:12px; color:var(--muted)}
+
+  #asuBlock {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease, opacity 0.3s ease;
+  opacity: 0;
+}
+#asuBlock.show {
+  max-height: 1000px; /* ajustá si hace falta */
+  opacity: 1;
+  background: #1a2b4c; /* para resaltar */
+  padding: 12px;
+  border-radius: 12px;
+}
+
+</style>
+</head>
+<body data-theme="night">
+ <div class="logo-container">
+  <img src="https://i.imgur.com/i5Zxe0k.png" class="logo" alt="Logo">
+</div>
+<header>
+  <h1> T R Á N S I T O  </h1>
+  <span class="chip" id="chipRow">Sin fila</span>
+  <button class="btn ghost" id="toggleTheme" type="button">Día/Noche</button>
+</header>
+
+<main>
+  <!-- Datos de vuelo -->
+  <section class="card">
+    <div class="legend">Datos de vuelo <span class="icon">+</span></div>
+    <div class="card-content">
+      <div class="grid">
+        <div class="field col-4">
+          <label for="Fecha">Fecha</label>
+          <input type="date" id="Fecha" />
+        </div>
+        <div class="field col-4">
+          <label for="Escala">Escala (IATA)</label>
+          <select id="Escala"></select>
+        </div>
+        <div class="field col-4">
+          <label for="Matricula">Matrícula</label>
+          <select id="Matricula"></select>
+        </div>
+        <div class="field col-3"><label for="Llegada_Numero_Vuelo">LLegada vuelo FO </label><input id="Llegada_Numero_Vuelo" /></div>
+        <div class="field col-3"><label for="Salida_Numero_Vuelo">Salida vuelo FO</label><input id="Salida_Numero_Vuelo" /></div>
+        <div class="field col-3"><label for="Posición">Posición</label><input id="Posición" /></div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- Datos de Personal -->
+  <section class="card">
+    <div class="legend">Datos de Personal <span class="icon">+</span></div>
+    <div class="card-content">
+      <div class="grid">
+        <div class="field col-3"><label for="SSR">SSR</label><input id="SSR" /></div>
+        <div class="field col-3"><label for="Colaboradores_en_plataforma">Colaboradores en plataforma</label><input id="Colaboradores_en_plataforma" /></div>
+        <div class="field col-3"><label for="Colaboradores_en_Patio_de_equipaje">Colaboradores en Patio de equipaje</label><input id="Colaboradores_en_Patio_de_equipaje" /></div>
+        <div class="field col-3"><label for="Conciliacion_de_equipaje">Conciliacion de equipaje</label><input id="Conciliacion_de_equipaje" /></div>
+        <div class="field col-3"><label for="Choferes_de_micro">Choferes de micro</label><input id="Choferes_de_micro" /></div>
+        <div class="field col-3"><label for="Load_Control">Load Control</label><input id="Load_Control" /></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Equipajes y Carga -->
+  <section class="card">
+    <div class="legend">Equipajes y Carga <span class="icon">+</span></div>
+    <div class="card-content">
+<div class="grid">
+
+<div class="field col-12">
+  <button class="btn ghost" type="button" id="toggleDropdown">Llegada</button>
+  <div id="extraDropdown">
+<div class="field col-3"><label for="Llegada__Cantidad_de_bultos_equipajes">Llegada  Cantidad de bultos (equipajes)</label><input type="number" min="0" id="Llegada__Cantidad_de_bultos_equipajes" /></div>
+        <div class="field col-3"><label for="Llegada_KG_de_equipajes">Llegada KG de equipajes</label><input type="number" min="0" step="0.1" id="Llegada_KG_de_equipajes" /></div>
+
+     <div class="field col-12">
+  <button class="btn ghost" type="button" id="toggleDropdown4">Carga en Llegada</button>
+  <div id="carga2"> 
+
+        <div class="field col-3"><label for="Llegada_Cantidad_de_bultos_carga">Llegada Cantidad de bultos (carga)</label><input type="number" min="0" id="Llegada_Cantidad_de_bultos_carga" /></div>    	
+        <div class="field col-3"><label for="Llegada_KG_de_carga">Llegada KG de carga</label><input type="number" min="0" step="0.1" id="Llegada_KG_de_carga" /></div>
+
+             </div>
+        </div>
+
+        <div class="field col-3"><label for="LLegada_Cantidad_PAX">LLegada Cantidad PAX</label><input type="number" min="0" id="LLegada_Cantidad_PAX" /></div>
+        </div>
+        </div>
+      
+        
+        <div class="field col-12">
+  <button class="btn ghost" type="button" id="toggleDropdown2">Salida</button>
+  <div id="salisa">
+        <div class="field col-3"><label for="Salida_Cantidad_de_bultos_equipajes">Salida Cantidad de bultos (equipajes)</label><input type="number" min="0" id="Salida_Cantidad_de_bultos_equipajes" /></div>
+        <div class="field col-3"><label for="Salida_KG_de_equipajes">Salida KG de equipajes</label><input type="number" min="0" step="0.1" id="Salida_KG_de_equipajes" /></div>
+      
+             <div class="field col-12">
+  <button class="btn ghost" type="button" id="toggleDropdown3">Carga en Salida</button>
+  <div id="carga1"> 
+     <div class="field col-3"><label for="Salida_Cantidad_de_bultos_carga">Salida Cantidad de bultos (carga)</label><input type="number" min="0" id="Salida_Cantidad_de_bultos_carga" /></div>	
+        <div class="field col-3"><label for="Salida_KG_de_carga">Salida KG de carga</label><input type="number" min="0" step="0.1" id="Salida_KG_de_carga" /></div>
+          </div>
+        </div>
+
+        <div class="field col-3"><label for="Salida_Cantidad_PAX">Salida Cantidad PAX</label><input type="number" min="0" id="Salida_Cantidad_PAX" /></div>
+  </div>
+        </div>
+
+
+        <div class="field col-3">
+          <label for="Estado_de_bolsin">Estado de bolsin</label>
+          <select id="Estado_de_bolsin"><option></option><option>OK</option><option>Observado</option><option>No aplica</option></select>
+        </div>
+        <div class="field col-3"><label for="Numero_de_precinto">Numero de precinto</label><input id="Numero_de_precinto" /></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Tiempos operativos (con botón de hora) -->
+  <section class="card">
+    <div class="legend">Tiempos operativos <span class="icon">+</span></div>
+    <div class="card-content">
+      <div class="grid" id="timeGrid"></div>
+
+      <div class="field col-12">
+  <button class="btn ghost" type="button" id="toggleAsu">ASU</button>
+  <div id="asuBlock">
+    <!-- Aquí irán los tiempos de ASU -->
+  </div>
+</div>
+
+      <div class="small">Todos estos campos tienen botón ⏱ para cargar hora actual (editable).</div>
+    </div>
+  </section>
+
+  <!-- Asistencias e internos -->
+  <section class="card">
+    <div class="legend">Asistencias e internos <span class="icon">+</span></div>
+    <div class="card-content">
+      <div class="grid">
+        <div class="field col-3"><label for="Asistencias_Llegada">Asistencias Llegada</label><input type="number" min="0" id="Asistencias_Llegada" /></div>
+        <div class="field col-3"><label for="Asistencias_salida">Asistencias salida</label><input type="number" min="0" id="Asistencias_salida" /></div>
+
+        <div class="field col-3"><label for="GPU_Interno">GPU Interno</label><input id="GPU_Interno" /></div>
+        <div class="field col-3"><label for="TL_Interno">TL Interno</label><input id="TL_Interno" /></div>
+        <div class="field col-3"><label for="CT_INTERNO">CT INTERNO</label><input id="CT_INTERNO" /></div>
+        <div class="field col-3"><label for="TP_INTERNO">TP INTERNO</label><input id="TP_INTERNO" /></div>
+        <div class="field col-3"><label for="BR_INTERNO">BR INTERNO</label><input id="BR_INTERNO" /></div>
+        <div class="field col-3"><label for="ESCALERA_DELANTERA_INTERNO">ESCALERA DELANTERA INTERNO</label><input id="ESCALERA_DELANTERA_INTERNO" /></div>
+        <div class="field col-3"><label for="ESCALERA_TRASERA_INTERNO">ESCALERA TRASERA INTERNO</label><input id="ESCALERA_TRASERA_INTERNO" /></div>
+        <div class="field col-3"><label for="CM_INTERNOS">CM INTERNOS</label><input id="CM_INTERNOS" /></div>
+        <div class="field col-3"><label for="MICROS_INTERNOS">MICROS INTERNOS</label><input id="MICROS_INTERNOS" /></div>
+        <div class="field col-3"><label for="AM_AA_Interno">AM / AA Interno</label><input id="AM_AA_Interno" /></div>
+        <div class="field col-3"><label for="DM_DA_Interno">DM / DA  Interno</label><input id="DM_DA_Interno" /></div>
+        <div class="field col-3"><label for="CÓDIGO_DEMORA">CÓDIGO DEMORA</label><input id="CÓDIGO_DEMORA" /></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Observaciones -->
+  <section class="card">
+    <div class="legend">Observaciones <span class="icon">+</span></div>
+    <div class="card-content">
+      <textarea id="Observaciones" placeholder="Anotaciones operativas, novedades, etc."></textarea>
+    </div>
+  </section>
+
+  <div class="bar">
+    <div class="status" id="saveStatus">Guardado local listo.</div>
+    <button class="btn ghost" type="button" id="btnBorrarLocal">Borrar guardado local</button>
+    <button class="btn" type="button" id="btnEnviar">Enviar Vuelo</button>
+  </div>
+</main>
+
+<script>
+/* ====================
+   Configurables
+==================== */
+const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzHBAOf8dQrIiWr0cfk_0cD3WOJ92iHlP7xW59WmkKcjB0zYfL_oiB8wD6gcXgokJ0O/exec"; // <- Poné tu URL
+// Destinos Flybondi (IATA) — editables
+const DESTINOS_IATA = [
+"AEP","AUQ","BRC","CNF","CNQ","COR","CRD","ENO","EZE","FTE","FLN","GIG","GRU","IGR","JUJ","MCZ","MDQ","MDZ","MVD","NQN","PDP","PMY","REL","RES","SDE","SLA","TUC","USH"
+];
+// Matrículas — editables
+const MATRICULAS = ["LV-KJD","LV-KJE","LV-KAY","LV-KAH","LV-KJF","LV-KCD","LV-KCE","LV-HKN","LV-KHO","LV-KEF","LV-KEG","LV-KEH","LV-KDR","LV-KDQ","LY-MLJ","LY-VEL","LY-NVL","PR-MLD"];
+
+/* ====================
+   Render de acordeón
+   (todas las secciones arrancan cerradas)
+==================== */
+document.querySelectorAll(".card .legend").forEach(legend=>{
+  // icon already in HTML; ensure it's "+"
+  const icon = legend.querySelector(".icon");
+  if(icon) icon.textContent = "+";
+  legend.addEventListener("click", ()=>{
+    const card = legend.parentElement;
+    card.classList.toggle("open");
+    const ic = legend.querySelector(".icon");
+    if(ic) ic.textContent = card.classList.contains("open") ? "−" : "+";
+  });
+});
+
+/* ====================
+   Definición de campos
+==================== */
+const TIME_FIELDS = [
+"Apertura de patio",
+"Cierre de patio",
+  "Calzas Colocación",
+  "GPU Encendido",
+"GPU Conexión aeronave",
+ "Escalera Delantera Adose",
+ "Escalera Trasera Adose",
+ "Pasarela Adose",
+"BT Apetura",
+"BT Comienzo Carga",
+"BT Fin Carga",
+"BD Apertura",
+"BD Comienzo Descarga",
+"BD Fin Descarga",
+"BD Comienzo Carga",
+"BD Fin Carga",
+"BT Inicio Carga",
+"BT Fin Carga",
+"BT Cierre",
+"BD Cierre",
+"Escalera Delantera Quite",
+"Escalera Trasera Quite",
+"Pasarela Quite",
+"ASU Encendido",
+"ASU Conexion aeronave",
+"ASU Desconexion aeronave",
+"ASU Apagado",
+"GPU Desconexion aeronave",
+"GPU Apagado",
+ "Calza Quite",
+  "Pushback"
+];
+// ID helpers
+const idOf = (label) => label
+  .replaceAll("  "," ")      // espacios dobles
+  .replace(/[^\p{L}\p{N}]+/gu,"_")
+  .replace(/^_+|_+$/g,"");
+
+/* ====================
+   Render estático
+==================== */
+const selEscala = document.getElementById("Escala");
+DESTINOS_IATA.forEach(c=>{
+  const op = document.createElement("option"); op.value=c; op.textContent=c; selEscala.appendChild(op);
+});
+const selMat = document.getElementById("Matricula");
+MATRICULAS.forEach(m=>{
+  const op = document.createElement("option"); op.value=m; op.textContent=m; selMat.appendChild(op);
+});
+// Fecha hoy por defecto
+(function setToday(){
+  const d = new Date();
+  const y = d.getFullYear();
+  const m = String(d.getMonth()+1).padStart(2,"0");
+  const day = String(d.getDate()).padStart(2,"0");
+  document.getElementById("Fecha").value = `${y}-${m}-${day}`;
+})();
+
+// Render de campos de hora
+const timeGrid = document.getElementById("timeGrid");
+TIME_FIELDS.forEach(lbl=>{
+  const id = idOf(lbl);
+  const wrap = document.createElement("div");
+  wrap.className = "field col-3";
+  wrap.innerHTML = `
+    <label for="${id}">${lbl}</label>
+    <div class="time-wrap">
+      <input type="time" id="${id}">
+      <button class="time-btn" type="button" data-for="${id}">⏱</button>
+    </div>`;
+
+  if(lbl.startsWith("ASU")){
+    document.getElementById("asuBlock").appendChild(wrap);
+  } else {
+    timeGrid.appendChild(wrap);
+  }
+});
+
+document.querySelectorAll(".time-btn").forEach(btn=>{
+  btn.addEventListener("click", ()=>{
+    const id = btn.getAttribute("data-for");
+    const el = document.getElementById(id);
+    const now = new Date();
+    el.value = String(now.getHours()).padStart(2,"0")+":"+String(now.getMinutes()).padStart(2,"0");
+    schedulePartialSave();
+  });
+});
+
+// Día / Noche
+document.getElementById("toggleTheme").addEventListener("click", ()=>{
+  const cur = document.body.getAttribute("data-theme");
+  document.body.setAttribute("data-theme", cur==="day" ? "night" : "day");
+  localStorage.setItem("fo_theme", document.body.getAttribute("data-theme"));
+});
+(function restoreTheme(){
+  const t = localStorage.getItem("fo_theme"); if(t) document.body.setAttribute("data-theme", t);
+})();
+
+/* ====================
+   Serialización en ORDEN de columnas
+==================== */
+// Orden canónico de columnas (exactamente lo que pediste)
+const COLS = [
+  "Fecha","Escala","Matricula",
+  "LLegada Numero","LLegada Vuelo","Salida Numero","Salida Vuelo",
+  "Posición","SSR","Colaboradores en plataforma","Colaboradores en Patio de equipaje",
+  "Conciliacion de equipaje","Choferes de micro","Load Control",
+  "Apertura","Cierre",
+  "LLegada Cantidad PAX","Salida Cantidad PAX",
+  "Llegada KG de equipajes","Llegada  Cantidad de bultos",
+  "Salida KG de equipajes","Salida Cantidad de bultos",
+  "Llegada KG de carga","Llegada Cantidad de bultos",
+  "Salida KG de carga","Salida Cantidad de bultos",
+  "Estado de bolsin","Numero de precinto",
+  // Tiempos
+  ...TIME_FIELDS,
+  // Asistencias e internos
+  "Asistencias Llegada","Asistencias salida",
+  "GPU Interno","TL Interno","CT INTERNO","TP INTERNO","BR INTERNO",
+  "ESCALERA DELANTERA INTERNO","ESCALERA TRASERA INTERNO",
+  "CM INTERNOS","MICROS INTERNOS","AM / AA Interno","DM / DA  Interno",
+  "CÓDIGO DEMORA",
+  "Observaciones"
+];
+
+// Mapa de ID DOM por cada columna
+const COL_ID = {};
+COLS.forEach(lbl=>{
+  switch(lbl){
+    case "LLegada Numero": COL_ID[lbl] = "Llegada_Numero"; break;
+    case "LLegada Vuelo": COL_ID[lbl] = "Llegada_Vuelo"; break;
+    case "Salida Numero": COL_ID[lbl] = "Salida_Numero"; break;
+    case "Salida Vuelo":  COL_ID[lbl] = "Salida_Vuelo";  break;
+
+    case "Colaboradores en plataforma": COL_ID[lbl] = "Colaboradores_en_plataforma"; break;
+    case "Colaboradores en Patio de equipaje": COL_ID[lbl] = "Colaboradores_en_Patio_de_equipaje"; break;
+    case "Conciliacion de equipaje": COL_ID[lbl] = "Conciliacion_de_equipaje"; break;
+    case "Choferes de micro": COL_ID[lbl] = "Choferes_de_micro"; break;
+    case "Load Control": COL_ID[lbl] = "Load_Control"; break;
+
+    case "LLegada Cantidad PAX": COL_ID[lbl] = "LLegada_Cantidad_PAX"; break;
+    case "Salida Cantidad PAX": COL_ID[lbl] = "Salida_Cantidad_PAX"; break;
+
+    case "Llegada KG de equipajes": COL_ID[lbl] = "Llegada_KG_de_equipajes"; break;
+    case "Llegada  Cantidad de bultos": COL_ID[lbl] = "Llegada__Cantidad_de_bultos_equipajes"; break;
+    case "Salida KG de equipajes": COL_ID[lbl] = "Salida_KG_de_equipajes"; break;
+    case "Salida Cantidad de bultos": COL_ID[lbl] = "Salida_Cantidad_de_bultos_equipajes"; break;
+
+    case "Llegada KG de carga": COL_ID[lbl] = "Llegada_KG_de_carga"; break;
+    case "Llegada Cantidad de bultos": COL_ID[lbl] = "Llegada_Cantidad_de_bultos_carga"; break;
+    case "Salida KG de carga": COL_ID[lbl] = "Salida_KG_de_carga"; break;
+    case "Salida Cantidad de bultos": COL_ID[lbl] = "Salida_Cantidad_de_bultos_carga"; break;
+
+    case "Estado de bolsin": COL_ID[lbl] = "Estado_de_bolsin"; break;
+    case "Numero de precinto": COL_ID[lbl] = "Numero_de_precinto"; break;
+
+    case "Asistencias Llegada": COL_ID[lbl] = "Asistencias_Llegada"; break;
+    case "Asistencias salida": COL_ID[lbl] = "Asistencias_salida"; break;
+
+    case "GPU Interno": COL_ID[lbl] = "GPU_Interno"; break;
+    case "TL Interno": COL_ID[lbl] = "TL_Interno"; break;
+    case "CT INTERNO": COL_ID[lbl] = "CT_INTERNO"; break;
+    case "TP INTERNO": COL_ID[lbl] = "TP_INTERNO"; break;
+    case "BR INTERNO": COL_ID[lbl] = "BR_INTERNO"; break;
+    case "ESCALERA DELANTERA INTERNO": COL_ID[lbl] = "ESCALERA_DELANTERA_INTERNO"; break;
+    case "ESCALERA TRASERA INTERNO": COL_ID[lbl] = "ESCALERA_TRASERA_INTERNO"; break;
+    case "CM INTERNOS": COL_ID[lbl] = "CM_INTERNOS"; break;
+    case "MICROS INTERNOS": COL_ID[lbl] = "MICROS_INTERNOS"; break;
+    case "AM / AA Interno": COL_ID[lbl] = "AM_AA_Interno"; break;
+    case "DM / DA  Interno": COL_ID[lbl] = "DM_DA_Interno"; break;
+    case "CÓDIGO DEMORA": COL_ID[lbl] = "CÓDIGO_DEMORA"; break;
+    default:
+      COL_ID[lbl] = idOf(lbl);
+  }
+});
+
+// Generar valores en el orden de COLS
+function getValuesOrdered(){
+  const arr = [];
+  for(const lbl of COLS){
+    const id = COL_ID[lbl];
+    const el = document.getElementById(id);
+    arr.push(el ? el.value ?? "" : "");
+  }
+  return arr;
+}
+
+/* ====================
+   Guardado local + parcial
+==================== */
+const STORAGE_KEY = "fo_form_temp";
+const ROWID_KEY = "fo_row_id";
+
+function saveLocal(){
+  const payload = { values: getValuesOrdered(), when: Date.now(), theme: document.body.getAttribute("data-theme") };
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(payload));
+  setStatus("Guardado local", "ok");
+}
+function loadLocal(){
+  const j = localStorage.getItem(STORAGE_KEY);
+  if(!j) return;
+  try{
+    const {values, theme} = JSON.parse(j);
+    if(theme) document.body.setAttribute("data-theme", theme);
+    // Volcar valores por orden
+    values.forEach((v, idx)=>{
+      const id = COL_ID[COLS[idx]];
+      const el = document.getElementById(id);
+      if(el){ el.value = v; }
+    });
+    setStatus("Recuperado desde el dispositivo", "ok");
+  }catch{}
+}
+// Eventos de input para autoguardado y guardado parcial
+document.addEventListener("input", ()=>{
+  saveLocal();
+  schedulePartialSave();
+});
+document.getElementById("btnBorrarLocal").addEventListener("click", ()=>{
+  localStorage.removeItem(STORAGE_KEY);
+  localStorage.removeItem(ROWID_KEY);
+  document.getElementById("chipRow").textContent = "Sin fila";
+  setStatus("Guardado local borrado", "warn");
+});
+
+loadLocal();
+
+/* ====================
+   Guardado progresivo (Apps Script)
+==================== */
+let debounce;
+function schedulePartialSave(){
+  clearTimeout(debounce);
+  debounce = setTimeout(savePartial, 800);
+}
+
+async function savePartial(){
+  if(!APPS_SCRIPT_URL || APPS_SCRIPT_URL.startsWith("TU_URL_")){
+    setStatus("Configura APPS_SCRIPT_URL para guardar en Sheet", "warn");
+    return;
+  }
+  try{
+    const rowId = localStorage.getItem(ROWID_KEY) || "";
+    const res = await fetch(APPS_SCRIPT_URL, {
+      method:"POST",
+      headers: {"Content-Type":"application/json"},
+      body: JSON.stringify({ modo:"parcial", rowId, cols: COLS, values: getValuesOrdered() })
+    });
+    const data = await res.json();
+    if(data && data.rowId){
+      localStorage.setItem(ROWID_KEY, data.rowId);
+      document.getElementById("chipRow").textContent = "Fila: " + data.rowId.slice(0,8);
+    }
+    setStatus("Guardado parcial en la hoja", "ok");
+  }catch(e){
+    setStatus("No se pudo guardar parcial ("+e.message+")", "err");
+  }
+}
+
+document.getElementById("btnEnviar").addEventListener("click", enviarFinal);
+async function enviarFinal(){
+  saveLocal();
+  try{
+    const rowId = localStorage.getItem(ROWID_KEY) || "";
+    const res = await fetch(APPS_SCRIPT_URL, {
+      method:"POST",
+      headers: {"Content-Type":"application/json"},
+      body: JSON.stringify({ modo:"final", rowId, cols: COLS, values: getValuesOrdered() })
+    });
+    const data = await res.json();
+    if(data.ok){
+      setStatus("Vuelo enviado y cerrado ✅", "ok");
+      alert("Vuelo enviado ✅");
+      localStorage.removeItem(STORAGE_KEY);
+      localStorage.removeItem(ROWID_KEY);
+      document.getElementById("chipRow").textContent = "Sin fila";
+      // (Opcional) reset
+      // location.reload();
+    }else{
+      setStatus("Error al cerrar: "+(data.message||"desconocido"), "err");
+      alert("Error al enviar: " + (data.message||""));
+    }
+  }catch(e){
+    setStatus("Error de red al enviar: "+e.message, "err");
+    alert("No se pudo enviar: " + e.message);
+  }
+}
+
+function setStatus(txt, kind){
+  const el = document.getElementById("saveStatus");
+  el.textContent = txt;
+  el.className = "status " + (kind||"");
+}
+
+document.getElementById("toggleDropdown").addEventListener("click", () => {
+  const dd = document.getElementById("extraDropdown");
+  dd.classList.toggle("show");
+  document.getElementById("toggleDropdown").textContent = dd.classList.contains("show") 
+    ? "Ocultar Opciones LLegada": 
+     "Llegada";});
+
+
+     document.getElementById("toggleDropdown2").addEventListener("click", () => {
+  const dd = document.getElementById("salisa");
+  dd.classList.toggle("show");
+  document.getElementById("toggleDropdown2").textContent = dd.classList.contains("show") 
+    ? "Ocultar Opciones Salida": 
+     "Salida";});
+     
+        document.getElementById("toggleDropdown3").addEventListener("click", () => {
+  const dd = document.getElementById("carga1");
+  dd.classList.toggle("show");
+  const btn = document.getElementById("toggleDropdown3");
+  
+  // Cambiar texto del botón
+  btn.textContent = dd.classList.contains("show") 
+    ? "Ocultar Opciones Carga"
+    : "Carga en Salida";
+  
+  // Cambiar color de fondo del div al mostrar/ocultar
+  if(dd.classList.contains("show")){
+    dd.style.backgroundColor = "#230470"; // el color que quieras al desplegar
+    dd.style.padding = "12px"; // opcional, para que se note más
+    dd.style.borderRadius = "12px"; // opcional
+  } else {
+    dd.style.backgroundColor = "transparent"; // vuelve al original
+    dd.style.padding = ""; 
+    dd.style.borderRadius = "";
+  }
+});
+  document.getElementById("toggleDropdown4").addEventListener("click", () => {
+  const dd = document.getElementById("carga2");
+  dd.classList.toggle("show");
+  const btn = document.getElementById("toggleDropdown4");
+  
+  // Cambiar texto del botón
+  btn.textContent = dd.classList.contains("show") 
+    ? "Ocultar Opciones Carga"
+    : "Carga en Llegada";
+  
+  // Cambiar color de fondo del div al mostrar/ocultar
+  if(dd.classList.contains("show")){
+    dd.style.backgroundColor = "#230470"; // el color que quieras al desplegar
+    dd.style.padding = "12px"; // opcional, para que se note más
+    dd.style.borderRadius = "12px"; // opcional
+  } else {
+    dd.style.backgroundColor = "transparent"; // vuelve al original
+    dd.style.padding = ""; 
+    dd.style.borderRadius = "";
+  }
+});
+document.getElementById("toggleAsu").addEventListener("click", () => {
+  const asu = document.getElementById("asuBlock");
+  asu.classList.toggle("show");
+  const btn = document.getElementById("toggleAsu");
+  btn.textContent = asu.classList.contains("show") 
+    ? "Ocultar ASU" 
+    : "ASU";
+});
+</script>
+</body>
 </html>
