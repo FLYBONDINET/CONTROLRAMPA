@@ -11,21 +11,46 @@
 
     body {
       font-family: Arial, sans-serif;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      min-height: 100vh;
       margin: 0;
       color: #fff;
       background: url('https://i.imgur.com/gnuNEhk.jpeg') no-repeat center center;
-      background-size: cover; /* se ajusta para cubrir toda la pantalla */
-      background-position: center;
+      background-size: cover;
       background-attachment: fixed;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding-top: 20px;
+    }
+
+    .top-bar {
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-bottom: 20px;
+    }
+
+    .contador {
+      background-color: #fdbe15;
+      color: #fff;
+      border: none;
+      border-radius: 12px;
+      padding: 12px 18px;
+      font-size: 16px;
+      font-weight: 500;
+      cursor: default;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+      text-align: center;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 8px;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
     }
 
     .container {
       background: rgba(0,0,0,0.7);
-      border-radius: 20px;
+      border-radius: 40px;
       padding: 30px;
       width: 90%;
       max-width: 400px;
@@ -35,7 +60,7 @@
     }
 
     h1 {
-      color: #ff6600;
+      color: #fdbe15;
       font-size: 28px;
       font-weight: bold;
       margin-bottom: 25px;
@@ -43,7 +68,7 @@
     }
 
     .button {
-      background-color: #ff6600;
+      background-color: #fdbe15;
       color: #fff;
       border: none;
       border-radius: 12px;
@@ -58,7 +83,6 @@
       gap: 12px;
       transition: transform 0.2s ease, box-shadow 0.2s ease;
       box-shadow: 0 5px 15px rgba(0,0,0,0.3);
-      touch-action: manipulation;
     }
 
     .button i {
@@ -84,10 +108,21 @@
     @media (max-width: 450px) {
       h1 { font-size: 24px; }
       .button { font-size: 16px; padding: 15px; }
+      .contador { font-size: 14px; padding: 10px 12px; }
     }
   </style>
 </head>
 <body>
+
+  <!-- Contadores como menú -->
+  <div class="top-bar">
+    <div class="contador" id="vuelosDia">Vuelos hoy: 0</div>
+    <div class="contador" id="vuelosMes">Vuelos mes: 0</div>
+    <div class="contador" id="vuelosAnio">Vuelos año: 0</div>
+    <div class="contador" id="usuariosActivos">Usuarios activos: 0</div>
+  </div>
+
+  <!-- Menú principal -->
   <div class="container">
     <h1>Rampa Flybondi</h1>
     <button class="button" onclick="location.href='rampa_llegada.html'">
@@ -103,5 +138,90 @@
       <i class="material-icons">history</i> Historial de Vuelos
     </button>
   </div>
+
+<script>
+const urlVuelos = "https://script.google.com/macros/s/AKfycbzHBAOf8dQrIiWr0cfk_0cD3WOJ92iHlP7xW59WmkKcjB0zYfL_oiB8wD6gcXgokJ0O/exec";
+const urlUsuarios = "https://script.google.com/macros/s/AKfycbyDlS9DwwsXMk2DCV6fi-BGix0Qi5P4Lk4if_Vc0wh5xIFqqXCBtg2zQnCgtrTitbc/exec";
+let tablaData = [];
+
+// Generar SessionID aleatorio
+const sessionId = '_' + Math.random().toString(36).substr(2, 9);
+
+// Formatear fecha
+function formatFecha(fechaStr){
+  if(!fechaStr) return "";
+  const date = new Date(fechaStr);
+  if(isNaN(date)) return fechaStr;
+  const dd = String(date.getDate()).padStart(2,"0");
+  const mm = String(date.getMonth()+1).padStart(2,"0");
+  const yyyy = date.getFullYear();
+  return `${dd}-${mm}-${yyyy}`;
+}
+
+// Actualizar contadores
+function actualizarContadores(){
+  const hoy = new Date();
+  const dia = hoy.toDateString();
+  const mes = hoy.getMonth();
+  const anio = hoy.getFullYear();
+
+  const vuelosHoy = tablaData.filter(f=>new Date(f.Fecha).toDateString()===dia).length;
+  const vuelosMes = tablaData.filter(f=>new Date(f.Fecha).getMonth()===mes && new Date(f.Fecha).getFullYear()===anio).length;
+  const vuelosAnio = tablaData.filter(f=>new Date(f.Fecha).getFullYear()===anio).length;
+
+  document.getElementById("vuelosDia").textContent = `Vuelos hoy: ${vuelosHoy}`;
+  document.getElementById("vuelosMes").textContent = `Vuelos mes: ${vuelosMes}`;
+  document.getElementById("vuelosAnio").textContent = `Vuelos año: ${vuelosAnio}`;
+}
+
+// Obtener datos de vuelos
+function obtenerVuelos(){
+  fetch(urlVuelos)
+    .then(res => res.json())
+    .then(data => {
+      if(Array.isArray(data)){
+        tablaData = data;
+        actualizarContadores();
+      } else {
+        console.error("Formato de datos de vuelos incorrecto", data);
+      }
+    })
+    .catch(err => console.error("Error fetch vuelos:", err));
+}
+
+// Usuarios activos
+function actualizarUsuarioActivo(){
+  fetch(urlUsuarios, {
+    method: "POST",
+    body: JSON.stringify({sessionId}),
+  }).catch(err => console.error(err));
+}
+
+function obtenerUsuariosActivos(){
+  fetch(urlUsuarios)
+    .then(res => res.json())
+    .then(data => {
+      if(data.activos !== undefined){
+        document.getElementById("usuariosActivos").textContent = `Usuarios activos: ${data.activos}`;
+      } else {
+        console.error("Formato de respuesta usuarios incorrecto", data);
+      }
+    })
+    .catch(err => console.error("Error fetch usuarios:", err));
+}
+
+// Inicializar
+obtenerVuelos();
+actualizarUsuarioActivo();
+obtenerUsuariosActivos();
+
+// Actualizar cada 10s
+setInterval(()=>{
+  obtenerVuelos();
+  actualizarUsuarioActivo();
+  obtenerUsuariosActivos();
+},10000);
+</script>
+
 </body>
 </html>
