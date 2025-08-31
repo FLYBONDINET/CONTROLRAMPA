@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>Formulario Operativo - Flybondi    -    TRÁNSITO</title>
+<title>T R Á N S I T O </title>
 <style>
   :root{
     --bg:#0b1b3a;       /* azul oscuro */
@@ -84,6 +84,18 @@
   max-height: 500px;
   opacity: 1;
 }
+.logo-container {
+  display: flex;
+  justify-content: center; /* centra horizontal */
+  align-items: center;     /* centra vertical si hay altura */
+}
+
+.logo {
+  max-width: 200px;
+  width: 40%;
+  height: auto;
+  object-fit: contain;
+}
 #extraDropdown,
 #carga2 {
   max-height: 0;
@@ -157,8 +169,11 @@
 </style>
 </head>
 <body data-theme="night">
+ <div class="logo-container">
+  <img src="https://i.imgur.com/i5Zxe0k.png" class="logo" alt="Logo">
+</div>
 <header>
-  <h1>Formulario Operativo - Flybondi    -    TRÁNSITO 1  </h1>
+  <h1> T R Á N S I T O  </h1>
   <span class="chip" id="chipRow">Sin fila</span>
   <button class="btn ghost" id="toggleTheme" type="button">Día/Noche</button>
 </header>
