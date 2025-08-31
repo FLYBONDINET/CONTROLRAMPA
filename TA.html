@@ -8,8 +8,9 @@
   :root{
     --bg:#0b1b3a;       /* azul oscuro */
     --card:#0f254d;
-    --fg:#eaf2ff;
-    --muted:#9fb3d9;
+    --fg:#e6e7eb;
+    --muted:#e6e7eb;
+;
     --accent:#ffcc00;
     --ok:#16a34a;
     --warn:#f59e0b;
@@ -21,7 +22,7 @@
     --bg:#f6f8fc;
     --card:#ffffff;
     --fg:#0a1224;
-    --muted:#475569;
+    --muted:#f6f8fc;
     --accent:#ffcc00;
     --input-bg:#ffffff;
     --border:#d4dbe9;
@@ -49,6 +50,53 @@
     border-radius:16px; padding:16px; margin-bottom:16px;
   }
 
+  #extraDropdown {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease, opacity 0.3s ease;
+  opacity: 0;
+}
+#extraDropdown.show {
+  max-height: 500px; /* ajusta según lo que contenga */
+  opacity: 1;
+}
+#extraDropdown,
+#salisa {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease, opacity 0.3s ease;
+  opacity: 0;
+}
+#extraDropdown.show,
+#salisa.show {
+  max-height: 500px;
+  opacity: 1;
+}
+#extraDropdown,
+#carga1 {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease, opacity 0.3s ease;
+  opacity: 0;
+}
+#extraDropdown.show,
+#carga1.show {
+  max-height: 500px;
+  opacity: 1;
+}
+#extraDropdown,
+#carga2 {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease, opacity 0.3s ease;
+  opacity: 0;
+}
+#extraDropdown.show,
+#carga2.show {
+  max-height: 500px;
+  opacity: 1;
+}
+
   /* Acordeón styles (añadidos) */
   .legend{
     font-weight:700; margin-bottom:12px;
@@ -57,7 +105,6 @@
   .legend span.icon{ font-weight:900; font-size:18px; margin-left:10px; }
   .card-content{ display:none; padding-top:0; }
   .card.open .card-content{ display:block; }
-
   .grid{
     display:grid; gap:12px;
     grid-template-columns: repeat(1fr);
@@ -92,6 +139,21 @@
   .bar .status{flex:1; font-size:12px; color:var(--muted)}
   .ok{color:var(--ok)} .warn{color:var(--warn)} .err{color:var(--err)}
   .small{font-size:12px; color:var(--muted)}
+
+  #asuBlock {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease, opacity 0.3s ease;
+  opacity: 0;
+}
+#asuBlock.show {
+  max-height: 1000px; /* ajustá si hace falta */
+  opacity: 1;
+  background: #1a2b4c; /* para resaltar */
+  padding: 12px;
+  border-radius: 12px;
+}
+
 </style>
 </head>
 <body data-theme="night">
@@ -146,22 +208,47 @@
   <section class="card">
     <div class="legend">Equipajes y Carga <span class="icon">+</span></div>
     <div class="card-content">
-      <div class="grid">
-        <div class="field col-3"><label for="Llegada__Cantidad_de_bultos_equipajes">Llegada  Cantidad de bultos (equipajes)</label><input type="number" min="0" id="Llegada__Cantidad_de_bultos_equipajes" /></div>
+<div class="grid">
+
+<div class="field col-12">
+  <button class="btn ghost" type="button" id="toggleDropdown">Llegada</button>
+  <div id="extraDropdown">
+<div class="field col-3"><label for="Llegada__Cantidad_de_bultos_equipajes">Llegada  Cantidad de bultos (equipajes)</label><input type="number" min="0" id="Llegada__Cantidad_de_bultos_equipajes" /></div>
         <div class="field col-3"><label for="Llegada_KG_de_equipajes">Llegada KG de equipajes</label><input type="number" min="0" step="0.1" id="Llegada_KG_de_equipajes" /></div>
+
+     <div class="field col-12">
+  <button class="btn ghost" type="button" id="toggleDropdown4">Carga en Llegada</button>
+  <div id="carga2"> 
 
         <div class="field col-3"><label for="Llegada_Cantidad_de_bultos_carga">Llegada Cantidad de bultos (carga)</label><input type="number" min="0" id="Llegada_Cantidad_de_bultos_carga" /></div>    	
         <div class="field col-3"><label for="Llegada_KG_de_carga">Llegada KG de carga</label><input type="number" min="0" step="0.1" id="Llegada_KG_de_carga" /></div>
 
-        <div class="field col-3"><label for="LLegada_Cantidad_PAX">LLegada Cantidad PAX</label><input type="number" min="0" id="LLegada_Cantidad_PAX" /></div>
+             </div>
+        </div>
 
+        <div class="field col-3"><label for="LLegada_Cantidad_PAX">LLegada Cantidad PAX</label><input type="number" min="0" id="LLegada_Cantidad_PAX" /></div>
+        </div>
+        </div>
+      
+        
+        <div class="field col-12">
+  <button class="btn ghost" type="button" id="toggleDropdown2">Salida</button>
+  <div id="salisa">
         <div class="field col-3"><label for="Salida_Cantidad_de_bultos_equipajes">Salida Cantidad de bultos (equipajes)</label><input type="number" min="0" id="Salida_Cantidad_de_bultos_equipajes" /></div>
         <div class="field col-3"><label for="Salida_KG_de_equipajes">Salida KG de equipajes</label><input type="number" min="0" step="0.1" id="Salida_KG_de_equipajes" /></div>
-
-        <div class="field col-3"><label for="Salida_Cantidad_de_bultos_carga">Salida Cantidad de bultos (carga)</label><input type="number" min="0" id="Salida_Cantidad_de_bultos_carga" /></div>	
+      
+             <div class="field col-12">
+  <button class="btn ghost" type="button" id="toggleDropdown3">Carga en Salida</button>
+  <div id="carga1"> 
+     <div class="field col-3"><label for="Salida_Cantidad_de_bultos_carga">Salida Cantidad de bultos (carga)</label><input type="number" min="0" id="Salida_Cantidad_de_bultos_carga" /></div>	
         <div class="field col-3"><label for="Salida_KG_de_carga">Salida KG de carga</label><input type="number" min="0" step="0.1" id="Salida_KG_de_carga" /></div>
+          </div>
+        </div>
 
         <div class="field col-3"><label for="Salida_Cantidad_PAX">Salida Cantidad PAX</label><input type="number" min="0" id="Salida_Cantidad_PAX" /></div>
+  </div>
+        </div>
+
 
         <div class="field col-3">
           <label for="Estado_de_bolsin">Estado de bolsin</label>
@@ -177,6 +264,14 @@
     <div class="legend">Tiempos operativos <span class="icon">+</span></div>
     <div class="card-content">
       <div class="grid" id="timeGrid"></div>
+
+      <div class="field col-12">
+  <button class="btn ghost" type="button" id="toggleAsu">ASU</button>
+  <div id="asuBlock">
+    <!-- Aquí irán los tiempos de ASU -->
+  </div>
+</div>
+
       <div class="small">Todos estos campos tienen botón ⏱ para cargar hora actual (editable).</div>
     </div>
   </section>
@@ -260,18 +355,18 @@ const TIME_FIELDS = [
  "Escalera Delantera Adose",
  "Escalera Trasera Adose",
  "Pasarela Adose",
-"BT ABRE",
-"BT INICIO DESCARGA",
-"BT FIN DESCARGA",
-"BD ABRE",
-"BD INICIO DESCARGA",
-"BD FIN DESCARGA",
-"BD INICIO CARGA",
-"BD FIN CARGA",
-"BT INICIO CARGA",
-"BT FIN CARGA",
-"BT CIERRA",
-"BD CIERRA",
+"BT Apetura",
+"BT Comienzo Carga",
+"BT Fin Carga",
+"BD Apertura",
+"BD Comienzo Descarga",
+"BD Fin Descarga",
+"BD Comienzo Carga",
+"BD Fin Carga",
+"BT Inicio Carga",
+"BT Fin Carga",
+"BT Cierre",
+"BD Cierre",
 "Escalera Delantera Quite",
 "Escalera Trasera Quite",
 "Pasarela Quite",
@@ -322,8 +417,14 @@ TIME_FIELDS.forEach(lbl=>{
       <input type="time" id="${id}">
       <button class="time-btn" type="button" data-for="${id}">⏱</button>
     </div>`;
-  timeGrid.appendChild(wrap);
+
+  if(lbl.startsWith("ASU")){
+    document.getElementById("asuBlock").appendChild(wrap);
+  } else {
+    timeGrid.appendChild(wrap);
+  }
 });
+
 document.querySelectorAll(".time-btn").forEach(btn=>{
   btn.addEventListener("click", ()=>{
     const id = btn.getAttribute("data-for");
@@ -539,6 +640,72 @@ function setStatus(txt, kind){
   el.textContent = txt;
   el.className = "status " + (kind||"");
 }
+
+document.getElementById("toggleDropdown").addEventListener("click", () => {
+  const dd = document.getElementById("extraDropdown");
+  dd.classList.toggle("show");
+  document.getElementById("toggleDropdown").textContent = dd.classList.contains("show") 
+    ? "Ocultar Opciones LLegada": 
+     "Llegada";});
+
+
+     document.getElementById("toggleDropdown2").addEventListener("click", () => {
+  const dd = document.getElementById("salisa");
+  dd.classList.toggle("show");
+  document.getElementById("toggleDropdown2").textContent = dd.classList.contains("show") 
+    ? "Ocultar Opciones Salida": 
+     "Salida";});
+     
+        document.getElementById("toggleDropdown3").addEventListener("click", () => {
+  const dd = document.getElementById("carga1");
+  dd.classList.toggle("show");
+  const btn = document.getElementById("toggleDropdown3");
+  
+  // Cambiar texto del botón
+  btn.textContent = dd.classList.contains("show") 
+    ? "Ocultar Opciones Carga"
+    : "Carga en Salida";
+  
+  // Cambiar color de fondo del div al mostrar/ocultar
+  if(dd.classList.contains("show")){
+    dd.style.backgroundColor = "#230470"; // el color que quieras al desplegar
+    dd.style.padding = "12px"; // opcional, para que se note más
+    dd.style.borderRadius = "12px"; // opcional
+  } else {
+    dd.style.backgroundColor = "transparent"; // vuelve al original
+    dd.style.padding = ""; 
+    dd.style.borderRadius = "";
+  }
+});
+  document.getElementById("toggleDropdown4").addEventListener("click", () => {
+  const dd = document.getElementById("carga2");
+  dd.classList.toggle("show");
+  const btn = document.getElementById("toggleDropdown4");
+  
+  // Cambiar texto del botón
+  btn.textContent = dd.classList.contains("show") 
+    ? "Ocultar Opciones Carga"
+    : "Carga en Llegada";
+  
+  // Cambiar color de fondo del div al mostrar/ocultar
+  if(dd.classList.contains("show")){
+    dd.style.backgroundColor = "#230470"; // el color que quieras al desplegar
+    dd.style.padding = "12px"; // opcional, para que se note más
+    dd.style.borderRadius = "12px"; // opcional
+  } else {
+    dd.style.backgroundColor = "transparent"; // vuelve al original
+    dd.style.padding = ""; 
+    dd.style.borderRadius = "";
+  }
+});
+document.getElementById("toggleAsu").addEventListener("click", () => {
+  const asu = document.getElementById("asuBlock");
+  asu.classList.toggle("show");
+  const btn = document.getElementById("toggleAsu");
+  btn.textContent = asu.classList.contains("show") 
+    ? "Ocultar ASU" 
+    : "ASU";
+});
 </script>
 </body>
 </html>
