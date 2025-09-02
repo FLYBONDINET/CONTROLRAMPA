@@ -721,6 +721,42 @@ document.getElementById("toggleAsu").addEventListener("click", () => {
     ? "Ocultar ASU" 
     : "ASU";
 });
+  // --- Guardar automáticamente todos los campos ---
+function saveFormData() {
+  const data = {};
+  document.querySelectorAll("input, select, textarea").forEach(el => {
+    data[el.id] = el.value;
+  });
+  localStorage.setItem("formData", JSON.stringify(data));
+  document.getElementById("saveStatus").textContent = "Guardado local ✔️";
+}
+
+// --- Restaurar los datos al abrir la app ---
+function restoreFormData() {
+  const saved = localStorage.getItem("formData");
+  if (!saved) return;
+  const data = JSON.parse(saved);
+  Object.keys(data).forEach(id => {
+    const el = document.getElementById(id);
+    if (el) el.value = data[id];
+  });
+  document.getElementById("saveStatus").textContent = "Datos cargados desde local ✅";
+}
+
+// --- Borrar datos guardados ---
+document.getElementById("btnBorrarLocal").addEventListener("click", ()=>{
+  localStorage.removeItem("formData");
+  document.getElementById("saveStatus").textContent = "Guardado local borrado ❌";
+});
+
+// --- Guardado automático cada vez que se cambia algo ---
+document.querySelectorAll("input, select, textarea").forEach(el => {
+  el.addEventListener("change", saveFormData);
+  el.addEventListener("input", saveFormData);
+});
+
+// Restaurar cuando arranca
+restoreFormData();
 </script>
 </body>
 </html>
