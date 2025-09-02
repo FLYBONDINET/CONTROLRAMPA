@@ -334,7 +334,15 @@
 /* ====================
    Configurables
 ==================== */
-const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxVLzm2I3_IH-XCpTo4GZ5mKRjNPVHHg_TKQAtDjRYeZfjuKgqDnOOxlm36dVFwfRo/exec"; // <- Poné tu URL
+fetch("https://script.google.com/macros/s/AKfycbxVLzm2I3_IH-XCpTo4GZ5mKRjNPVHHg_TKQAtDjRYeZfjuKgqDnOOxlm36dVFwfRo/exec", {
+  method: "POST",
+  headers: { "Content-Type": "application/json" },
+  body: JSON.stringify({ /* tus datos */ })
+})
+.then(res => res.json())
+.then(data => console.log(data))
+.catch(err => console.error(err));
+
 // Destinos Flybondi (IATA) — editables
 const DESTINOS_IATA = [
 "AEP","AUQ","BRC","CNF","CNQ","COR","CRD","ENO","EZE","FTE","FLN","GIG","GRU","IGR","JUJ","MCZ","MDQ","MDZ","MVD","NQN","PDP","PMY","REL","RES","SDE","SLA","TUC","USH"
