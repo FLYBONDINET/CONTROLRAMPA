@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Formulario con Guardado Automático</title>
+  <link rel="stylesheet" href="estilos.css"> <!-- si quieres CSS separado -->
+</head>
+<body>
+
+<form id="miFormulario">
+  <label>Nombre: <input type="text" name="nombre"></label><br>
+  <label>Email: <input type="email" name="email"></label><br>
+  <label>Comentario: <textarea name="comentario"></textarea></label><br>
+  <label>País:
+    <select name="pais">
+      <option value="">Seleccione</option>
+      <option value="argentina">Argentina</option>
+      <option value="brasil">Brasil</option>
+      <option value="chile">Chile</option>
+    </select>
+  </label>
+</form>
+
+<script src="formulario.js"></script>
+</body>
+</html>
