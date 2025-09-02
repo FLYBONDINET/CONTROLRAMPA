@@ -335,11 +335,11 @@
    Configurables
 ==================== */
   const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxVLzm2I3_IH-XCpTo4GZ5mKRjNPVHHg_TKQAtDjRYeZfjuKgqDnOOxlm36dVFwfRo/exec";
-fetch("https://script.google.com/macros/s/AKfycbxVLzm2I3_IH-XCpTo4GZ5mKRjNPVHHg_TKQAtDjRYeZfjuKgqDnOOxlm36dVFwfRo/exec", {
-  method: "POST",
-  headers: { "Content-Type": "application/json" },
-  body: JSON.stringify({ /* tus datos */ })
-})
+const res = await fetch(APPS_SCRIPT_URL, {
+  method:"POST",
+  headers: {"Content-Type":"application/json"},
+  body: JSON.stringify({ modo:"final", rowId, cols: COLS, values: getValuesOrdered() })
+});
 .then(res => res.json())
 .then(data => console.log(data))
 .catch(err => console.error(err));
